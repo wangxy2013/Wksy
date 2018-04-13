@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:padding="@dimen/dm_5"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/ll_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_product_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="单号：SPOOOOOOOO1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/t14"/>
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dm_3"
+            android:text="产品名称：电池组"
+            android:textColor="@color/black"
+            android:textSize="@dimen/t14"/>
+
+        <TextView
+            android:id="@+id/tv_product_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dm_3"
+            android:text="产品数量：15"
+            android:textColor="@color/black"
+            android:textSize="@dimen/t14"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@color/blueB"
+            android:text="详情"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+        <Button
+            android:id="@+id/btn_out"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="@dimen/dm_5"
+            android:background="@color/blueB"
+            android:text="入库"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

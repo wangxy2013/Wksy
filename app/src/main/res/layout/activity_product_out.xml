@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/layout_head"/>
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/dm_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_sn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dm_15"
+            android:text="成品SN码:"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+
+        <EditText
+            android:id="@+id/et_sn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dm_30"
+            android:layout_marginRight="@dimen/dm_30"
+            android:layout_toLeftOf="@+id/btn_add"
+            android:layout_toRightOf="@+id/tv_sn"
+            android:background="@drawable/gray_frame_5dp"
+            android:gravity="center_vertical"
+            android:hint="请输入成品SN码"
+            android:padding="@dimen/dm_5"
+            android:textSize="14sp"/>
+
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/blueB"
+            android:text="添加"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_xzkw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dm_15"
+            android:text="出库库位:"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+
+        <TextView
+            android:id="@+id/tv_library"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dm_30"
+            android:layout_marginRight="@dimen/dm_30"
+            android:layout_toLeftOf="@+id/btn_submit1"
+            android:layout_toRightOf="@+id/tv_xzkw"
+            android:background="@drawable/gray_frame_5dp"
+            android:gravity="center_vertical"
+            android:hint="请选择出库库位"
+            android:padding="@dimen/dm_5"
+            android:textSize="14sp"/>
+
+        <Button
+            android:id="@+id/btn_submit1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/blueB"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="invisible"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_0.5"
+        android:layout_marginTop="@dimen/dm_5"
+        android:background="@color/gray"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_sn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

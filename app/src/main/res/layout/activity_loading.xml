@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
+    >
+
+
+
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:textSize="@dimen/t36"
+        android:textColor="@color/white"
+        android:text="维科溯源"
+        android:layout_marginTop="@dimen/dm_200"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+
+        android:layout_below="@+id/tv_text"
+        android:textSize="@dimen/t12"
+        android:textColor="@color/white"
+        android:text="W E I K E S U Y U A N"
+        android:layout_marginTop="@dimen/dm_5"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

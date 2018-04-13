@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/layout_head"/>
+
+<EditText
+    android:id="@+id/et_url"
+    android:padding="@dimen/dm_5"
+    android:hint="请设置服务器地址"
+    android:layout_margin="@dimen/dm_15"
+    android:textColor="@color/black"
+    android:textSize="@dimen/t16"
+    android:background="@drawable/gray_frame_5dp"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"/>
+
+
+    <Button
+        android:id="@+id/btn_submit"
+android:textColor="@color/white"
+        android:textSize="@dimen/t16"
+        android:text="确定"
+        android:layout_marginLeft="@dimen/dm_15"
+        android:layout_marginRight="@dimen/dm_15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blueB"/>
+
+</LinearLayout>

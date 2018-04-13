@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rl_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        android:orientation="vertical"
+        android:padding="@dimen/dm_3">
+
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dm_10"
+            android:src="@drawable/ic_back"/>
+
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="物料出库"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dm_5">
+
+        <TextView
+            android:id="@+id/tv_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="申请单号："
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+
+        <Button
+            android:id="@+id/btn_submit1"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/blueB"
+            android:text="查询"
+            android:visibility="invisible"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+        <EditText
+            android:id="@+id/et_task_id"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dm_5"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@+id/btn_submit1"
+            android:layout_toRightOf="@+id/tv_task"
+            android:background="@drawable/gray_frame_5dp"
+            android:hint="申请单号查询"
+            android:padding="@dimen/dm_5"
+            android:textSize="@dimen/t16"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dm_5">
+
+        <TextView
+            android:id="@+id/tv_sqrq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="申请日期："
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+
+        <Button
+            android:id="@+id/btn_submit2"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/blueB"
+            android:text="查询"
+            android:visibility="invisible"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dm_5"
+            android:gravity="center_vertical"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@+id/btn_submit2"
+            android:layout_toRightOf="@+id/tv_sqrq"
+            android:background="@drawable/gray_frame_5dp"
+            android:hint="请选择查询日期"
+            android:padding="@dimen/dm_5"
+            android:textSize="@dimen/t16"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dm_5">
+
+        <TextView
+            android:id="@+id/tv_sqbm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="申请部门："
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/blueB"
+            android:text="查询"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_department"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dm_5"
+            android:gravity="center_vertical"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@+id/btn_submit"
+            android:layout_toRightOf="@+id/tv_sqbm"
+            android:background="@drawable/gray_frame_5dp"
+            android:hint="请选择查询日期"
+            android:padding="@dimen/dm_5"
+            android:textSize="@dimen/t16"/>
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_0.5"
+        android:background="@color/gray"/>
+
+    <com.twlrg.slbl.widget.list.refresh.PullToRefreshRecyclerView
+        android:id="@+id/pullToRefreshRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"/>
+</LinearLayout>
