@@ -76,7 +76,7 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
     private List<MaterialInfo1> mMaerInfoList = new ArrayList<>();
     private MaterialAdapter mMaterialAdapter;
     private List<KWInfo> kwInfoList = new ArrayList<>();
-    private String kw_code, kw_name, t_id, ql_id, ql_itm, t_itm;
+    private String kw_code, kw_name, t_id, ql_id, ql_itm, t_itm,prd_no;
     private TaskInfo mTaskInfo;
     private static final int         REQUEST_SUCCESS        = 0x01;
     public static final  int         REQUEST_FAIL           = 0x02;
@@ -136,6 +136,8 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
             ql_id = mTaskInfo.getQl_id();
             ql_itm = mTaskInfo.getQl_itm();
             t_itm = mTaskInfo.getT_itm();
+            kw_code = mTaskInfo.getWh();
+            prd_no = mTaskInfo.getPrd_no();
         }
     }
 
@@ -176,6 +178,8 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
             }
         });
         rvSn.setAdapter(mMaterialAdapter);
+
+        tvLibrary.setText(kw_code);
     }
 
     private void getKv()
@@ -212,10 +216,17 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
                 return;
             }
 
+            if(Integer.parseInt(count)>mTaskInfo.getQty_import())
+            {
+                ToastUtil.show(MaterialOut1Activity.this, "数量大于实际检测合格量");
+                return;
+            }
+
+
 
             if (StringUtils.stringIsEmpty(sn))
             {
-                ToastUtil.show(MaterialOut1Activity.this, "请输入SN码!");
+                ToastUtil.show(MaterialOut1Activity.this, "请输入单号码!");
                 return;
             }
             else
@@ -235,12 +246,20 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
                     mProInfo.setQl_itm(ql_itm);
                     mProInfo.setT_itm(t_itm);
                     mProInfo.setOut_count(count);
+
+                    mProInfo.setQl_no(mTaskInfo.getQl_no());
+                    mProInfo.setPre_itm(mTaskInfo.getPre_itm());
+                    mProInfo.setPrd_no(mTaskInfo.getPrd_no());
+                    mProInfo.setBat_no(mTaskInfo.getBat_no());
+                    mProInfo.setMo_no(mTaskInfo.getMo_no());
+                    mProInfo.setEst_itm(mTaskInfo.getEst_itm());
                     mMaerInfoList.add(mProInfo);
 
                     Map<String, String> valuePairs = new HashMap<>();
                     valuePairs.put("CONTENT", sn);
                     valuePairs.put("QL_ID", ql_id);
                     valuePairs.put("QL_ITM", ql_itm);
+                    valuePairs.put("PRD_NO", prd_no);
                     DataRequest.instance().request(MaterialOut1Activity.this, Urls.getScanOutCheckUrl(), this, HttpRequest.POST, SCANOUTCHECK, valuePairs,
                             new ResultHandler());
                 }

@@ -43,7 +43,7 @@ public class MaterialOutAdapter extends RecyclerView.Adapter<MaterialOutHolder>
     public void onBindViewHolder(MaterialOutHolder holder, int position)
     {
         MaterialInfo mMaterialInfo = list.get(position);
-        holder.setTaskInfo(mMaterialInfo);
+        holder.setTaskInfo(mMaterialInfo,position);
     }
 
     @Override

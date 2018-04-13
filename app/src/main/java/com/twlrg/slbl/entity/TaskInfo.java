@@ -13,6 +13,20 @@ public class TaskInfo implements Serializable
 {
 
 
+    private String bat_no;
+    private String est_itm;//54,
+    private String mo_no;//MO84130001",
+    private String prd_name;//電芯",
+    private String prd_no;//DX010107",
+    private String pre_itm;//1,
+    private String ql_dd;//2018-04-13",
+    private String ql_no;//QL84130001",
+    private String qty;// 1,
+    private int qty_import;// 1,
+    private String qty_rtn;// 0,
+    private String wh;//01DX"
+
+
     private String t_id;
     private String t_name;
     private String t_status;
@@ -36,11 +50,25 @@ public class TaskInfo implements Serializable
     public TaskInfo(JSONObject obj)
     {
 
+        this.bat_no = obj.optString("BAT_NO");
+        this.est_itm = obj.optString("EST_ITM");
+        this.mo_no = obj.optString("MO_NO");
+        this.prd_name = obj.optString("PRD_NAME");
+        this.prd_no = obj.optString("PRD_NO");
+        this.pre_itm = obj.optString("PRE_ITM");
+        this.ql_dd = obj.optString("QL_DD");
+        this.ql_no = obj.optString("QL_NO");
+        this.wh = obj.optString("WH");
+        this.qty = obj.optString("QTY");
+        this.qty_import = obj.optInt("QTY_IMPORT");
+        this.qty_rtn = obj.optString("QTY_RTN");
+
+
+
+
         this.dep = obj.optString("DEP");
         this.dep_name = obj.optString("DEP_NAME");
         this.ql_date = obj.optString("QL_DATE");
-
-
         this.ql_id = obj.optString("QL_ID");
         this.t_itm = obj.optString("T_ITM");
         this.ql_itm = obj.optString("QL_ITM");
@@ -218,5 +246,127 @@ public class TaskInfo implements Serializable
     public void setQl_date(String ql_date)
     {
         this.ql_date = ql_date;
+    }
+
+
+    public String getBat_no()
+    {
+        return bat_no;
+    }
+
+    public void setBat_no(String bat_no)
+    {
+        this.bat_no = bat_no;
+    }
+
+    public String getEst_itm()
+    {
+        return est_itm;
+    }
+
+    public void setEst_itm(String est_itm)
+    {
+        this.est_itm = est_itm;
+    }
+
+    public String getMo_no()
+    {
+        return mo_no;
+    }
+
+    public void setMo_no(String mo_no)
+    {
+        this.mo_no = mo_no;
+    }
+
+    public String getPrd_name()
+    {
+        return prd_name;
+    }
+
+    public void setPrd_name(String prd_name)
+    {
+        this.prd_name = prd_name;
+    }
+
+    public String getPrd_no()
+    {
+        return prd_no;
+    }
+
+    public void setPrd_no(String prd_no)
+    {
+        this.prd_no = prd_no;
+    }
+
+    public String getPre_itm()
+    {
+        return pre_itm;
+    }
+
+    public void setPre_itm(String pre_itm)
+    {
+        this.pre_itm = pre_itm;
+    }
+
+    public String getQl_dd()
+    {
+        return ql_dd;
+    }
+
+    public void setQl_dd(String ql_dd)
+    {
+        this.ql_dd = ql_dd;
+    }
+
+    public String getQl_no()
+    {
+        return ql_no;
+    }
+
+    public void setQl_no(String ql_no)
+    {
+        this.ql_no = ql_no;
+    }
+
+    public String getQty()
+    {
+        return qty;
+    }
+
+    public void setQty(String qty)
+    {
+        this.qty = qty;
+    }
+
+
+    public int getQty_import()
+    {
+        return qty_import;
+    }
+
+    public void setQty_import(int qty_import)
+    {
+        this.qty_import = qty_import;
+    }
+
+    public String getQty_rtn()
+    {
+        return qty_rtn;
+    }
+
+    public void setQty_rtn(String qty_rtn)
+    {
+        this.qty_rtn = qty_rtn;
+    }
+
+    public String getWh()
+    {
+        return wh;
+    }
+
+    public void setWh(String wh)
+    {
+        this.wh = wh;
     }
 }

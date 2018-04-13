@@ -49,6 +49,8 @@ public class MaterialOutDetailActivity extends BaseActivity implements PullToRef
     LinearLayout              llProduct;
     @BindView(R.id.pullToRefreshRecyclerView)
     PullToRefreshRecyclerView pullToRefreshRecyclerView;
+    @BindView(R.id.tv_prd_no)
+    TextView                  tvPrdNo;
     private ImageView                 mBackIv;
     private TextView                  mTitleTv;
     private PullToRefreshRecyclerView mPullToRefreshRecyclerView;
@@ -125,10 +127,11 @@ public class MaterialOutDetailActivity extends BaseActivity implements PullToRef
 
         if (null != mTaskInfo)
         {
-            tvProductId.setText("申请单号：" + mTaskInfo.getQl_id());
-            tvProductName.setText("类别名称：" + mTaskInfo.getPro_name());
-            tvProductAmount.setText("需求数量：" + mTaskInfo.getPro_count());
-            tvXch.setText("项次号：" + mTaskInfo.getQl_itm());
+            tvProductId.setText("申请单号：" + mTaskInfo.getQl_no());
+            tvProductName.setText("物料名称：" + mTaskInfo.getPrd_name());
+            tvProductAmount.setText("可出库量：" + mTaskInfo.getQty_import());
+            tvXch.setText("项次号：" + mTaskInfo.getPre_itm());
+            tvPrdNo.setText("物料编号：" + mTaskInfo.getPrd_no());
         }
 
         mMaterialOutAdapter = new MaterialOutAdapter(mMaterialInfoList, MaterialOutDetailActivity.this);
@@ -141,7 +144,8 @@ public class MaterialOutDetailActivity extends BaseActivity implements PullToRef
     private void getProductList()
     {
         Map<String, String> valuePairs = new HashMap<>();
-        valuePairs.put("T_ID", mTaskInfo.getT_id());
+        valuePairs.put("QL_ID", mTaskInfo.getQl_no());
+        valuePairs.put("QL_ITM", mTaskInfo.getPre_itm());
         valuePairs.put("PAGE", pn + "");
         valuePairs.put("PAGESIZE", "15");
 

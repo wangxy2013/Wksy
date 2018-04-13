@@ -9,13 +9,23 @@ import java.io.Serializable;
  */
 public class MaterialInfo1 implements Serializable
 {
+
+
+    private String ql_no;
+    private String pre_itm;
+    private String prd_no;
+    private String bat_no;
+    private String mo_no;
+    private String est_itm;
+
+
     private String mete_id;
     private String out_count;
     private String kw;
     private String t_id;
     private String is_in;
     private String kwn;
-    private int in_count;
+    private int    in_count;
     private String t_itm;
     private String ql_id;
     private String ql_itm;
@@ -118,5 +128,65 @@ public class MaterialInfo1 implements Serializable
     public void setQl_itm(String ql_itm)
     {
         this.ql_itm = ql_itm;
+    }
+
+    public String getQl_no()
+    {
+        return ql_no;
+    }
+
+    public void setQl_no(String ql_no)
+    {
+        this.ql_no = ql_no;
+    }
+
+    public String getPre_itm()
+    {
+        return pre_itm;
+    }
+
+    public void setPre_itm(String pre_itm)
+    {
+        this.pre_itm = pre_itm;
+    }
+
+    public String getPrd_no()
+    {
+        return prd_no;
+    }
+
+    public void setPrd_no(String prd_no)
+    {
+        this.prd_no = prd_no;
+    }
+
+    public String getBat_no()
+    {
+        return bat_no;
+    }
+
+    public void setBat_no(String bat_no)
+    {
+        this.bat_no = bat_no;
+    }
+
+    public String getMo_no()
+    {
+        return mo_no;
+    }
+
+    public void setMo_no(String mo_no)
+    {
+        this.mo_no = mo_no;
+    }
+
+    public String getEst_itm()
+    {
+        return est_itm;
+    }
+
+    public void setEst_itm(String est_itm)
+    {
+        this.est_itm = est_itm;
     }
 }

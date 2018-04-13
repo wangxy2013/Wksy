@@ -22,7 +22,6 @@ public class MaterialOutHolder extends RecyclerView.ViewHolder
     private TextView mProductAmountTv;
 
 
-
     public MaterialOutHolder(View rootView)
     {
         super(rootView);
@@ -34,11 +33,11 @@ public class MaterialOutHolder extends RecyclerView.ViewHolder
     }
 
 
-    public void setTaskInfo(MaterialInfo mMaterialInfo)
+    public void setTaskInfo(MaterialInfo mMaterialInfo, int position)
     {
-        mProductNameTv.setText("物料类别名：" + mMaterialInfo.getType_name());
-        mProductIdTv.setText("物料类别号：" + mMaterialInfo.getType_no());
-        mProductAmountTv.setText("出库数量：" + mMaterialInfo.getCount());
+        mProductIdTv.setText("序号：" + (position + 1));
+        mProductNameTv.setText("出库数量：" + mMaterialInfo.getCount());
+        mProductAmountTv.setText("出库时间：" + mMaterialInfo.getCtime());
     }
 
 }
