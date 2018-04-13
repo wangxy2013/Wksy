@@ -133,8 +133,8 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
         if (null != mTaskInfo)
         {
             t_id = mTaskInfo.getT_id();
-            ql_id = mTaskInfo.getQl_id();
-            ql_itm = mTaskInfo.getQl_itm();
+            ql_id = mTaskInfo.getQl_no();
+            ql_itm = mTaskInfo.getPre_itm();
             t_itm = mTaskInfo.getT_itm();
             kw_code = mTaskInfo.getWh();
             prd_no = mTaskInfo.getPrd_no();
