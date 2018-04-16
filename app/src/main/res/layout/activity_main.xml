@@ -13,6 +13,7 @@
         android:id="@+id/tv_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dm_10"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dm_15"
         android:gravity="center_horizontal"
@@ -20,74 +21,55 @@
         android:textColor="@color/blue"
         android:textSize="@dimen/t36"
         android:textStyle="bold"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dm_40"
-        android:orientation="horizontal"
-        android:padding="@dimen/dm_15"
-        >
 
         <Button
             android:id="@+id/btn_wlrk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dm_20"
-            android:layout_weight="1"
             android:background="@color/blueB"
-            android:paddingBottom="@dimen/dm_30"
-            android:paddingTop="@dimen/dm_30"
+            android:paddingBottom="@dimen/dm_15"
+            android:paddingTop="@dimen/dm_15"
             android:text="@string/wlrk"
             android:textColor="@color/white"
-            android:textSize="28sp"/>
+            android:textSize="22sp"/>
 
         <Button
             android:id="@+id/btn_wlck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dm_20"
-            android:layout_weight="1"
             android:background="@color/blueB"
-            android:paddingBottom="@dimen/dm_30"
-            android:paddingTop="@dimen/dm_30"
+            android:paddingBottom="@dimen/dm_15"
+            android:paddingTop="@dimen/dm_15"
             android:text="@string/wlck"
             android:textColor="@color/white"
-            android:textSize="28sp"/>
+            android:textSize="22sp"/>
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/dm_15"
-        >
 
         <Button
             android:id="@+id/btn_cprk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dm_20"
-            android:layout_weight="1"
             android:background="@color/blueB"
-            android:paddingBottom="@dimen/dm_30"
-            android:paddingTop="@dimen/dm_30"
+            android:paddingBottom="@dimen/dm_15"
+            android:paddingTop="@dimen/dm_15"
             android:text="@string/cprk"
             android:textColor="@color/white"
-            android:textSize="28sp"/>
+            android:textSize="22sp"/>
 
         <Button
             android:id="@+id/btn_cpck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dm_20"
-            android:layout_weight="1"
             android:background="@color/blueB"
-            android:paddingBottom="@dimen/dm_30"
-            android:paddingTop="@dimen/dm_30"
+            android:paddingBottom="@dimen/dm_15"
+            android:paddingTop="@dimen/dm_15"
             android:text="@string/cpck"
             android:textColor="@color/white"
-            android:textSize="28sp"/>
+            android:textSize="22sp"/>
 
-    </LinearLayout>
 </LinearLayout>

@@ -42,7 +42,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 申请单号
+ * 物料申请单号
  */
 public class RequestNoListActivity extends BaseActivity implements PullToRefreshBase.OnRefreshListener<RecyclerView>, View.OnClickListener, IRequestListener
 {
@@ -64,7 +64,7 @@ public class RequestNoListActivity extends BaseActivity implements PullToRefresh
 
 
     private List<KWInfo> kwInfoList = new ArrayList<>();
-    private String kw_code, kw_name;
+    private String kw_code="", kw_name;
 
 
     private int pn = 1;
@@ -272,14 +272,16 @@ public class RequestNoListActivity extends BaseActivity implements PullToRefresh
                 mHandler.sendMessage(mHandler.obtainMessage(REQUEST_FAIL, resultMsg));
             }
         }
+        else   if (GET_WV.equals(action))
+        {
+            if (ConstantUtil.RESULT_SUCCESS.equals(resultCode))
+            {
+                mHandler.sendMessage(mHandler.obtainMessage(GET_WV_SUCCESS, obj));
+            }
+
+        }
     }
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
+
 }

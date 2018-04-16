@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dm_30"
+            android:layout_marginLeft="@dimen/dm_25"
             android:layout_marginRight="@dimen/dm_30"
             android:layout_toLeftOf="@+id/btn_add"
             android:layout_toRightOf="@+id/tv_sn"
@@ -92,7 +92,48 @@
             android:textSize="16sp"
             android:visibility="invisible"/>
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/tv_batch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dm_15"
+            android:text="批次号:"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+
+        <EditText
+            android:id="@+id/et_batch"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dm_45"
+            android:layout_marginRight="@dimen/dm_30"
+            android:layout_toLeftOf="@+id/btn_submit3"
+            android:layout_toRightOf="@+id/tv_batch"
+            android:background="@drawable/gray_frame_5dp"
+            android:gravity="center_vertical"
+            android:hint="请输入批次号"
+            android:padding="@dimen/dm_5"
+            android:textSize="14sp"/>
+
+        <Button
+            android:id="@+id/btn_submit3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/blueB"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="invisible"/>
+    </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dm_0.5"

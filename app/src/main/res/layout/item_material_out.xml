@@ -56,8 +56,9 @@
             android:textSize="@dimen/t14"/>
         <TextView
             android:id="@+id/tv_product_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dm_90"
             android:layout_marginTop="@dimen/dm_3"
             android:text="产品名称：电池组"
             android:textColor="@color/black"

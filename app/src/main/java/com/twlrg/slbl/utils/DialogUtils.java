@@ -152,7 +152,7 @@ public class DialogUtils
             @Override
             public void onClick(View v)
             {
-                mClickListener.onSubmit(wheelMain.getTime());
+                mClickListener.onSubmit(StringUtils.getFormatDate(wheelMain.getTime()));
                 dialog.dismiss();
             }
         });

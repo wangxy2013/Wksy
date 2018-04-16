@@ -42,7 +42,7 @@ public class ConfigManager
     private static final String USER_SCORE      = "user_score";
     private static final String BUS_ID          = "bus_id";
     private static final String REGISTER_ID     = "register_id";
-
+    private static final String USER_POWER          = "USER_POWER";
     private static final String  BASE_URL ="base_url";
 
 
@@ -239,6 +239,17 @@ public class ConfigManager
         mSharedPreferences.edit().putString(BASE_URL, base_url).commit();
     }
 
-
+    public String getUserPower()
+    {
+        return mSharedPreferences.getString(USER_POWER, "1111");
+    }
+    //    public String getBaseUrl()
+//    {
+//        return mSharedPreferences.getString(BASE_URL, "http://192.168.1.110:8080/cloud");
+//    }
+    public void setUserPower(String base_url)
+    {
+        mSharedPreferences.edit().putString(USER_POWER, base_url).commit();
+    }
 }
 

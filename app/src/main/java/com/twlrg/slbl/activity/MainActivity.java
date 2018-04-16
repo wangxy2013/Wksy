@@ -64,6 +64,34 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
     {
         tvTitle.setText(ConfigManager.instance().getUserName());
         ivBack.setVisibility(View.GONE);
+        btnWlrk.setVisibility(View.GONE);
+        btnWlck.setVisibility(View.GONE);
+        btnCprk.setVisibility(View.GONE);
+        btnCpck.setVisibility(View.GONE);
+
+
+        String userPower = ConfigManager.instance().getUserPower();
+
+        if(!StringUtils.stringIsEmpty(userPower) &&userPower.length()>=4 )
+        {
+
+            if (userPower.charAt(0) == '1') {
+                btnWlrk.setVisibility(View.VISIBLE);
+            }
+
+            if (userPower.charAt(1) == '1') {
+                btnWlck.setVisibility(View.VISIBLE);
+            }
+
+            if (userPower.charAt(2) == '1') {
+                btnCprk.setVisibility(View.VISIBLE);
+            }
+
+            if (userPower.charAt(3) == '1') {
+                btnCpck.setVisibility(View.VISIBLE);
+            }
+
+        }
     }
 
 
@@ -86,10 +114,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
 
                 break;
             case R.id.btn_cpck:
-                startActivity(new Intent(MainActivity.this,ProductOutListActivity.class));
+                //startActivity(new Intent(MainActivity.this,ProductOutListActivity.class));
+                startActivity(new Intent(MainActivity.this,NoticeListSelectActivity.class));
                 break;
 
             case R.id.btn_cprk:
+
                 startActivity(new Intent(MainActivity.this,ProductInListActivity.class));
 
                 break;

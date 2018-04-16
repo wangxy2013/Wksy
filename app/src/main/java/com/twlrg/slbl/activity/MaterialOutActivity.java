@@ -190,7 +190,7 @@ public class MaterialOutActivity extends BaseActivity implements IRequestListene
     private void getKv()
     {
         Map<String, String> valuePairs = new HashMap<>();
-        valuePairs.put("CODE", "kw");
+        valuePairs.put("CODE", "KW");
         DataRequest.instance().request(MaterialOutActivity.this, Urls.getKVUrl(), this, HttpRequest.POST, GET_WV, valuePairs,
                 new KWListHandler());
 

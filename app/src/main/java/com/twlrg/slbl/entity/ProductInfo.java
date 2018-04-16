@@ -21,6 +21,7 @@ public class ProductInfo
     private String v;//3635~3640"
 
 
+
     //    材料编号	METE_ID
     //    材料类型编号	TYPE_NO
     //    材料类型	TYPE_NAME
@@ -40,7 +41,7 @@ public class ProductInfo
     private String t_id;
     private String pro_count;
     private String n_date;
-
+    private String cus_name;
 
     public ProductInfo(JSONObject obj)
     {
@@ -61,6 +62,8 @@ public class ProductInfo
         this.pro_count = obj.optString("PRO_COUNT");
         this.n_date = obj.optString("N_DATE");
         this.kw = obj.optString("KW");
+        this.cus_name = obj.optString("CUS_NAME");
+
 
     }
 
@@ -244,5 +247,14 @@ public class ProductInfo
     public void setN_date(String n_date)
     {
         this.n_date = n_date;
+    }
+
+
+    public String getCus_name() {
+        return cus_name;
+    }
+
+    public void setCus_name(String cus_name) {
+        this.cus_name = cus_name;
     }
 }

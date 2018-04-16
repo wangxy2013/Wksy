@@ -10,17 +10,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.twlrg.slbl.R;
 import com.twlrg.slbl.adapter.SNAdapter;
 import com.twlrg.slbl.entity.KWInfo;
 import com.twlrg.slbl.entity.ProInfo;
-import com.twlrg.slbl.entity.ProductInfo;
 import com.twlrg.slbl.http.DataRequest;
 import com.twlrg.slbl.http.HttpRequest;
 import com.twlrg.slbl.http.IRequestListener;
 import com.twlrg.slbl.json.KWListHandler;
-import com.twlrg.slbl.json.ProductInfoHandler;
 import com.twlrg.slbl.json.ResultHandler;
 import com.twlrg.slbl.listener.MyItemClickListener;
 import com.twlrg.slbl.utils.ConstantUtil;
@@ -30,9 +27,9 @@ import com.twlrg.slbl.utils.ToastUtil;
 import com.twlrg.slbl.utils.Urls;
 import com.twlrg.slbl.widget.DividerDecoration;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -59,19 +56,22 @@ public class ProductInActivity extends BaseActivity implements IRequestListener
     TextView     tvLibrary;
     @BindView(R.id.rv_sn)
     RecyclerView rvSn;
+    @BindView(R.id.et_batch)
+    EditText     etBatch;
 
     private List<ProInfo> mSnList = new ArrayList<>();
     private SNAdapter mSNAdapter;
     private List<KWInfo> kwInfoList = new ArrayList<>();
-    private String kw_code, kw_name, t_id;
+    private String kw_code, kw_name, t_id,prd_no;
 
     private static final int REQUEST_SUCCESS = 0x01;
     public static final  int REQUEST_FAIL    = 0x02;
     private static final int GET_WV_SUCCESS  = 0x04;
-
+    private static final int PRODUCT_CHECK_SUCCESS = 0x05;
+    private static final int PRODUCT_CHECK_FAIL= 0x06;
     private static final String GET_WV   = "GET_WV";
     private static final String CHECK_IN = "CHECK_IN";
-
+    private static final String  PRODUCT_CHECK = " PRODUCT_CHECK";
     private BaseHandler mHandler = new BaseHandler(this)
     {
         @Override
@@ -96,8 +96,13 @@ public class ProductInActivity extends BaseActivity implements IRequestListener
                     kwInfoList.clear();
                     kwInfoList.addAll(mKWListHandler.getKWInfoList());
                     break;
-
-
+                case PRODUCT_CHECK_SUCCESS:
+                    mSNAdapter.notifyDataSetChanged();
+                    break;
+                case   PRODUCT_CHECK_FAIL:
+                    ToastUtil.show(ProductInActivity.this, msg.obj.toString());
+                    mSnList.remove(mSnList.size() - 1);
+                    break;
             }
         }
     };
@@ -107,6 +112,7 @@ public class ProductInActivity extends BaseActivity implements IRequestListener
     protected void initData()
     {
         t_id = getIntent().getStringExtra("T_ID");
+        prd_no = getIntent().getStringExtra("PRD_NO");
     }
 
     @Override
@@ -150,7 +156,7 @@ public class ProductInActivity extends BaseActivity implements IRequestListener
     private void getKv()
     {
         Map<String, String> valuePairs = new HashMap<>();
-        valuePairs.put("CODE", "kw");
+        valuePairs.put("CODE", "KW");
         DataRequest.instance().request(ProductInActivity.this, Urls.getKVUrl(), this, HttpRequest.POST, GET_WV, valuePairs,
                 new KWListHandler());
 
@@ -193,8 +199,17 @@ public class ProductInActivity extends BaseActivity implements IRequestListener
                     mProInfo.setKw(kw_code);
                     mProInfo.setSn(sn);
                     mProInfo.setKwn(kw_name);
+                    mProInfo.setBatch(etBatch.getText().toString());
+                    mProInfo.setBat_no(etBatch.getText().toString());
                     mSnList.add(mProInfo);
-                    mSNAdapter.notifyDataSetChanged();
+                    //mSNAdapter.notifyDataSetChanged();
+
+                    Map<String, String> valuePairs = new HashMap<>();
+                    valuePairs.put("T_ID", t_id);
+                    valuePairs.put("SN", sn);
+                    valuePairs.put("PRD_NO", prd_no);
+                    DataRequest.instance().request(this, Urls.getProdInChekUrl(), this, HttpRequest.POST, PRODUCT_CHECK, valuePairs,
+                            new ResultHandler());
                 }
             }
 
@@ -273,6 +288,20 @@ public class ProductInActivity extends BaseActivity implements IRequestListener
                 mHandler.sendMessage(mHandler.obtainMessage(REQUEST_FAIL, resultMsg));
             }
         }
+        else if (PRODUCT_CHECK.equals(action))
+        {
+            if (ConstantUtil.RESULT_SUCCESS.equals(resultCode))
+            {
+                mHandler.sendMessage(mHandler.obtainMessage(PRODUCT_CHECK_SUCCESS, obj));
+            }
+            else
+            {
+                mHandler.sendMessage(mHandler.obtainMessage(PRODUCT_CHECK_FAIL, resultMsg));
+            }
+        }
+
+
 
     }
+
 }

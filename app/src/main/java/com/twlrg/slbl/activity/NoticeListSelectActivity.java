@@ -5,26 +5,26 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.zxing.activity.CaptureActivity;
 import com.twlrg.slbl.R;
-import com.twlrg.slbl.adapter.ProductTaskAdapter;
+import com.twlrg.slbl.adapter.CksqdAdapter;
+import com.twlrg.slbl.adapter.NoticeSelectAdapter;
+import com.twlrg.slbl.entity.KWInfo;
 import com.twlrg.slbl.entity.TaskInfo;
 import com.twlrg.slbl.http.DataRequest;
 import com.twlrg.slbl.http.HttpRequest;
 import com.twlrg.slbl.http.IRequestListener;
+import com.twlrg.slbl.json.KWListHandler;
 import com.twlrg.slbl.json.TaskListHandler;
 import com.twlrg.slbl.listener.MyItemClickListener;
+import com.twlrg.slbl.listener.MyOnClickListener;
 import com.twlrg.slbl.utils.ConstantUtil;
-import com.twlrg.slbl.utils.LogUtil;
-import com.twlrg.slbl.utils.StringUtils;
+import com.twlrg.slbl.utils.DialogUtils;
 import com.twlrg.slbl.utils.ToastUtil;
 import com.twlrg.slbl.utils.Urls;
 import com.twlrg.slbl.widget.DividerDecoration;
@@ -37,33 +37,42 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
- * 成品列表
+ * 成品申请单号
  */
-public class ProductInListActivity extends BaseActivity implements PullToRefreshBase.OnRefreshListener<RecyclerView>, View.OnClickListener, IRequestListener
+public class NoticeListSelectActivity extends BaseActivity implements PullToRefreshBase.OnRefreshListener<RecyclerView>, View.OnClickListener, IRequestListener
 {
     @BindView(R.id.btn_submit)
     Button   btnSubmit;
     @BindView(R.id.et_task_id)
     EditText etTaskId;
+    @BindView(R.id.tv_time)
+    TextView tvTime;
+    @BindView(R.id.tv_department)
+    TextView tvDepartment;
     private ImageView                 mBackIv;
     private TextView                  mTitleTv;
     private PullToRefreshRecyclerView mPullToRefreshRecyclerView;
     private RecyclerView              mRecyclerView;
 
-    private ProductTaskAdapter mTaskAdapter;
-    private List<TaskInfo> mMaterialInfoList = new ArrayList<>();
+    private NoticeSelectAdapter mTaskAdapter;
+    private List<TaskInfo> mCksqdList = new ArrayList<>();
+
+
+    private List<KWInfo> kwInfoList = new ArrayList<>();
+    private String kw_code="", kw_name;
+
 
     private int pn = 1;
     private int mRefreshStatus;
-    private static final String GET_PRODUCT_LIST = "GET_PRODUCT_LIST";
-
-    private static final int REQUEST_SUCCESS = 0x01;
-    private static final int REQUEST_FAIL    = 0x02;
-
-    private String mTid = "";
-    private String t_id;
+    private static final String GET_TASK_LIST   = "get_list";
+    private static final String GET_WV          = "GET_WV";
+    private static final int    REQUEST_SUCCESS = 0x01;
+    private static final int    REQUEST_FAIL    = 0x02;
+    private static final int    GET_WV_SUCCESS  = 0x04;
+    private              String mTid            = "";
     private BaseHandler mHandler = new BaseHandler(this)
     {
         @Override
@@ -74,16 +83,21 @@ public class ProductInListActivity extends BaseActivity implements PullToRefresh
             {
                 case REQUEST_SUCCESS:
                     TaskListHandler mTaskListHandler = (TaskListHandler) msg.obj;
-                    mMaterialInfoList.addAll(mTaskListHandler.getTaskInfoList());
+                    mCksqdList.addAll(mTaskListHandler.getTaskInfoList());
                     mTaskAdapter.notifyDataSetChanged();
 
                     break;
 
                 case REQUEST_FAIL:
-                    ToastUtil.show(ProductInListActivity.this, msg.obj.toString());
+                    ToastUtil.show(NoticeListSelectActivity.this, msg.obj.toString());
 
                     break;
 
+                case GET_WV_SUCCESS:
+                    KWListHandler mKWListHandler = (KWListHandler) msg.obj;
+                    kwInfoList.clear();
+                    kwInfoList.addAll(mKWListHandler.getKWInfoList());
+                    break;
 
             }
         }
@@ -97,14 +111,23 @@ public class ProductInListActivity extends BaseActivity implements PullToRefresh
     @Override
     protected void initViews(Bundle savedInstanceState)
     {
-        setContentView(R.layout.activity_product_list);
+        setContentView(R.layout.activity_notice_select);
         mBackIv = (ImageView) findViewById(R.id.iv_back);
         mTitleTv = (TextView) findViewById(R.id.tv_title);
         mPullToRefreshRecyclerView = (PullToRefreshRecyclerView) findViewById(R.id.pullToRefreshRecyclerView);
         mPullToRefreshRecyclerView.setPullLoadEnabled(true);
         mRecyclerView = mPullToRefreshRecyclerView.getRefreshableView();
+        getKv();
     }
 
+    private void getKv()
+    {
+        Map<String, String> valuePairs = new HashMap<>();
+        valuePairs.put("CODE", "BM");
+        DataRequest.instance().request(this, Urls.getKVUrl(), this, HttpRequest.POST, GET_WV, valuePairs,
+                new KWListHandler());
+
+    }
 
     @Override
     protected void initEvent()
@@ -115,41 +138,16 @@ public class ProductInListActivity extends BaseActivity implements PullToRefresh
         mPullToRefreshRecyclerView.setPullRefreshEnabled(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.addItemDecoration(new DividerDecoration(this));
-        etTaskId.addTextChangedListener(new TextWatcher()
-        {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
-            {
+        tvTime.setOnClickListener(this);
+        tvDepartment.setOnClickListener(this);
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s)
-            {
-                if (s.length() == 0)
-                {
-                    mTid = "";
-                    mMaterialInfoList.clear();
-                    pn = 1;
-                    mRefreshStatus = 0;
-                    getProductList();
-
-                }
-            }
-        });
     }
 
     @Override
     protected void initViewData()
     {
 
-        mTaskAdapter = new ProductTaskAdapter(mMaterialInfoList, ProductInListActivity.this, new MyItemClickListener()
+        mTaskAdapter = new NoticeSelectAdapter(mCksqdList, NoticeListSelectActivity.this, new MyItemClickListener()
         {
 
             //详情
@@ -157,57 +155,34 @@ public class ProductInListActivity extends BaseActivity implements PullToRefresh
             public void onItemClick(View view, int position)
             {
 
-                Bundle b = new Bundle();
-                b.putSerializable("TASKINFO", mMaterialInfoList.get(position));
-                startActivity(new Intent(ProductInListActivity.this, ProductInDetailActivity.class).putExtras(b));
-            }
-        }, new MyItemClickListener()
-        {
-            //出库操作
-            @Override
-            public void onItemClick(View view, int position)
-            {
-                t_id = mMaterialInfoList.get(position).getT_id();
-
-                startActivity(new Intent(ProductInListActivity.this, ProductInActivity.class)
-                        .putExtra("T_ID", t_id)
-                        .putExtra("PRD_NO", mMaterialInfoList.get(position).getPrd_no())
-
-                );
-
-
+                startActivity(new Intent(NoticeListSelectActivity.this, ProductOutListActivity.class).putExtra("N_ID", mCksqdList.get(position).getN_id()));
             }
         });
         mRecyclerView.setAdapter(mTaskAdapter);
 
-
     }
-
 
     @Override
     protected void onResume()
     {
         super.onResume();
-        mMaterialInfoList.clear();
-        pn = 1;
-        getProductList();
     }
 
     private void getProductList()
     {
+        mCksqdList.clear();
         Map<String, String> valuePairs = new HashMap<>();
-
-        valuePairs.put("T_ID", mTid);
-        valuePairs.put("PAGE", pn + "");
-        valuePairs.put("PAGESIZE", "15");
-        DataRequest.instance().request(ProductInListActivity.this, Urls.getMesTaskListUrl(), this, HttpRequest.POST, GET_PRODUCT_LIST, valuePairs,
+        valuePairs.put("N_ID", mTid);
+        valuePairs.put("N_DEP", kw_code);
+        valuePairs.put("N_DD", tvTime.getText().toString());
+        DataRequest.instance().request(NoticeListSelectActivity.this, Urls.getNoticeSelectListUrl(), this, HttpRequest.POST, GET_TASK_LIST, valuePairs,
                 new TaskListHandler());
     }
 
     @Override
     public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView)
     {
-        mMaterialInfoList.clear();
+        mCksqdList.clear();
         pn = 1;
         mRefreshStatus = 0;
         getProductList();
@@ -233,17 +208,42 @@ public class ProductInListActivity extends BaseActivity implements PullToRefresh
         {
             mTid = etTaskId.getText().toString();
 
-            if (StringUtils.stringIsEmpty(mTid))
-            {
-                ToastUtil.show(this, "请输入任务单号");
-                return;
-            }
-
-
-            mMaterialInfoList.clear();
+            mCksqdList.clear();
             pn = 1;
             mRefreshStatus = 0;
             getProductList();
+        }
+        else if (v == tvTime)
+        {
+            DialogUtils.showTimeDialog(NoticeListSelectActivity.this, new MyOnClickListener.OnSubmitListener()
+            {
+                @Override
+                public void onSubmit(String content)
+                {
+                    tvTime.setText(content);
+                }
+            });
+        }
+        else if (v == tvDepartment)
+        {
+            if (!kwInfoList.isEmpty())
+            {
+                DialogUtils.showKWInfoDialog(this, kwInfoList, new MyItemClickListener()
+                {
+                    @Override
+                    public void onItemClick(View view, int position)
+                    {
+                        KWInfo mKWInfo = kwInfoList.get(position);
+
+                        if (null != mKWInfo)
+                        {
+                            kw_code = mKWInfo.getKw_code();
+                            kw_name = mKWInfo.getKw_name();
+                            tvDepartment.setText(kw_name);
+                        }
+                    }
+                });
+            }
         }
     }
 
@@ -259,7 +259,7 @@ public class ProductInListActivity extends BaseActivity implements PullToRefresh
             mPullToRefreshRecyclerView.onPullDownRefreshComplete();
         }
 
-        if (GET_PRODUCT_LIST.equals(action))
+        if (GET_TASK_LIST.equals(action))
         {
             if (ConstantUtil.RESULT_SUCCESS.equals(resultCode))
             {
@@ -270,7 +270,16 @@ public class ProductInListActivity extends BaseActivity implements PullToRefresh
                 mHandler.sendMessage(mHandler.obtainMessage(REQUEST_FAIL, resultMsg));
             }
         }
+        else   if (GET_WV.equals(action))
+        {
+            if (ConstantUtil.RESULT_SUCCESS.equals(resultCode))
+            {
+                mHandler.sendMessage(mHandler.obtainMessage(GET_WV_SUCCESS, obj));
+            }
+
+        }
     }
+
 
 
 }

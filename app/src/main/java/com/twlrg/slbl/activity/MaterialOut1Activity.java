@@ -1,5 +1,6 @@
 package com.twlrg.slbl.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -15,14 +16,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.google.zxing.activity.CaptureActivity;
 import com.twlrg.slbl.R;
 import com.twlrg.slbl.adapter.MaterialAdapter;
-import com.twlrg.slbl.adapter.SNAdapter;
 import com.twlrg.slbl.entity.KWInfo;
 import com.twlrg.slbl.entity.MaterialInfo1;
-import com.twlrg.slbl.entity.ProInfo;
 import com.twlrg.slbl.entity.TaskInfo;
 import com.twlrg.slbl.http.DataRequest;
 import com.twlrg.slbl.http.HttpRequest;
@@ -72,11 +70,13 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
     Button       btnScan;
     @BindView(R.id.et_count)
     EditText     etCount;
+    @BindView(R.id.et_batNo)
+    EditText     etBatNo;
 
     private List<MaterialInfo1> mMaerInfoList = new ArrayList<>();
     private MaterialAdapter mMaterialAdapter;
     private List<KWInfo> kwInfoList = new ArrayList<>();
-    private String kw_code, kw_name, t_id, ql_id, ql_itm, t_itm,prd_no;
+    private String kw_code, kw_name, t_id, ql_id, ql_itm, t_itm, prd_no;
     private TaskInfo mTaskInfo;
     private static final int         REQUEST_SUCCESS        = 0x01;
     public static final  int         REQUEST_FAIL           = 0x02;
@@ -109,6 +109,18 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
                     KWListHandler mKWListHandler = (KWListHandler) msg.obj;
                     kwInfoList.clear();
                     kwInfoList.addAll(mKWListHandler.getKWInfoList());
+
+                    for (int i = 0; i < kwInfoList.size(); i++)
+                    {
+                        KWInfo mKWInfo = kwInfoList.get(i);
+                        if (kw_code.equals(mKWInfo.getKw_code()))
+                        {
+                            kw_name = mKWInfo.getKw_name();
+                            tvLibrary.setText(kw_name);
+                        }
+
+                    }
+
                     break;
 
 
@@ -117,7 +129,7 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
                     break;
                 case SCAN_OUT_CHECK_FAILD:
                     ToastUtil.show(MaterialOut1Activity.this, msg.obj.toString());
-                    mMaerInfoList.remove(mMaerInfoList.size()-1);
+                    mMaerInfoList.remove(mMaerInfoList.size() - 1);
 
                     break;
             }
@@ -161,10 +173,10 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
     protected void initViewData()
     {
         getKv();
-        tvTitle.setText("物料出库操作");
+        tvTitle.setText("物料出库");
         tvSubmit.setVisibility(View.VISIBLE);
         tvSubmit.setText("出库");
-
+        etBatNo.setText(mTaskInfo.getBat_no());
         rvSn.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rvSn.addItemDecoration(new DividerDecoration(this));
 
@@ -179,13 +191,12 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
         });
         rvSn.setAdapter(mMaterialAdapter);
 
-        tvLibrary.setText(kw_code);
     }
 
     private void getKv()
     {
         Map<String, String> valuePairs = new HashMap<>();
-        valuePairs.put("CODE", "kw");
+        valuePairs.put("CODE", "KW");
         DataRequest.instance().request(MaterialOut1Activity.this, Urls.getKVUrl(), this, HttpRequest.POST, GET_WV, valuePairs,
                 new KWListHandler());
 
@@ -216,12 +227,11 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
                 return;
             }
 
-            if(Integer.parseInt(count)>mTaskInfo.getQty_import())
+            if (Integer.parseInt(count) > mTaskInfo.getQty_import())
             {
                 ToastUtil.show(MaterialOut1Activity.this, "数量大于实际检测合格量");
                 return;
             }
-
 
 
             if (StringUtils.stringIsEmpty(sn))
@@ -250,7 +260,7 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
                     mProInfo.setQl_no(mTaskInfo.getQl_no());
                     mProInfo.setPre_itm(mTaskInfo.getPre_itm());
                     mProInfo.setPrd_no(mTaskInfo.getPrd_no());
-                    mProInfo.setBat_no(mTaskInfo.getBat_no());
+                    mProInfo.setBat_no(etBatNo.getText().toString());
                     mProInfo.setMo_no(mTaskInfo.getMo_no());
                     mProInfo.setEst_itm(mTaskInfo.getEst_itm());
                     mMaerInfoList.add(mProInfo);
@@ -296,7 +306,7 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
             }
 
             Map<String, List> valuePairs = new HashMap<>();
-            valuePairs.put("list",mMaerInfoList);
+            valuePairs.put("list", mMaerInfoList);
             DataRequest.instance().request1(MaterialOut1Activity.this, Urls.getCheckoutUrl(), this, HttpRequest.POST, CHECK_OUT, valuePairs,
                     new ResultHandler());
         }
@@ -305,11 +315,11 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
             if (Build.VERSION.SDK_INT > 22)
             {
                 if (ContextCompat.checkSelfPermission(MaterialOut1Activity.this,
-                        android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+                        Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
                 {
                     //先判断有没有权限 ，没有就在这里进行权限的申请
                     ActivityCompat.requestPermissions(MaterialOut1Activity.this,
-                            new String[]{android.Manifest.permission.CAMERA}, 9001);
+                            new String[]{Manifest.permission.CAMERA}, 9001);
 
                 }
                 else
@@ -411,4 +421,11 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

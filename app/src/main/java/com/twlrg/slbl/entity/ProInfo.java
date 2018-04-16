@@ -7,14 +7,21 @@ package com.twlrg.slbl.entity;
  */
 public class ProInfo
 {
-    private String kw;
-    private String kwn;
-    private String sn;
     private String t_id;
-    private String n_id;
-    private String so_id;
-    private String so_itm;
-    private String n_itm;
+    private String    dep;
+    private String        dep_name;
+    private String   cus_no;
+    private String        cus_name;
+    private String  bat_no;
+    private String         kw;
+    private String kwn;
+    private String         sn;
+    private String  so_id;
+    private String         so_itm;
+    private String  n_id;
+    private String     n_itm;
+
+    private String batch;
 
     public String getKw()
     {
@@ -94,5 +101,55 @@ public class ProInfo
     public void setN_itm(String n_itm)
     {
         this.n_itm = n_itm;
+    }
+
+    public String getDep() {
+        return dep;
+    }
+
+    public void setDep(String dep) {
+        this.dep = dep;
+    }
+
+    public String getDep_name() {
+        return dep_name;
+    }
+
+    public void setDep_name(String dep_name) {
+        this.dep_name = dep_name;
+    }
+
+    public String getCus_no() {
+        return cus_no;
+    }
+
+    public void setCus_no(String cus_no) {
+        this.cus_no = cus_no;
+    }
+
+    public String getCus_name() {
+        return cus_name;
+    }
+
+    public void setCus_name(String cus_name) {
+        this.cus_name = cus_name;
+    }
+
+    public String getBat_no() {
+        return bat_no;
+    }
+
+    public void setBat_no(String bat_no) {
+        this.bat_no = bat_no;
+    }
+
+    public String getBatch()
+    {
+        return batch;
+    }
+
+    public void setBatch(String batch)
+    {
+        this.batch = batch;
     }
 }

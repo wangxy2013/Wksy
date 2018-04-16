@@ -187,7 +187,7 @@ public class MaterInActivity extends BaseActivity implements IRequestListener
     private void getKv()
     {
         Map<String, String> valuePairs = new HashMap<>();
-        valuePairs.put("CODE", "kw");
+        valuePairs.put("CODE", "KW");
         DataRequest.instance().request(MaterInActivity.this, Urls.getKVUrl(), this, HttpRequest.POST, GET_WV, valuePairs,
                 new KWListHandler());
 

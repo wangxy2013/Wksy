@@ -97,6 +97,7 @@ public class ProductOutListActivity extends BaseActivity implements PullToRefres
     @Override
     protected void initData()
     {
+        mTid = getIntent().getStringExtra("N_ID");
     }
 
     @Override
@@ -120,7 +121,7 @@ public class ProductOutListActivity extends BaseActivity implements PullToRefres
         mPullToRefreshRecyclerView.setPullRefreshEnabled(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.addItemDecoration(new DividerDecoration(this));
-        etTaskId.addTextChangedListener(new TextWatcher()
+       /* etTaskId.addTextChangedListener(new TextWatcher()
         {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
@@ -147,7 +148,7 @@ public class ProductOutListActivity extends BaseActivity implements PullToRefres
 
                 }
             }
-        });
+        });*/
     }
 
     @Override
@@ -179,21 +180,15 @@ public class ProductOutListActivity extends BaseActivity implements PullToRefres
             }
         });
         mRecyclerView.setAdapter(mProdNoticeAdapter);
-
-    }
-
-
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        mProdNoticeInfoList.clear();
-        pn = 1;
         getProductList();
+
     }
+
+
 
     private void getProductList()
     {
+        mProdNoticeInfoList.clear();
         Map<String, String> valuePairs = new HashMap<>();
 
         valuePairs.put("N_ID", mTid);

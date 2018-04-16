@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.twlrg.slbl.R;
@@ -18,9 +19,9 @@ public class ProductInHolder extends RecyclerView.ViewHolder
 {
     private TextView mProductNameTv;
     private TextView mProductIdTv;
-
+    private TextView mRroNoTv;
     private TextView mProductAmountTv;
-    private Button   mDetailBtn;
+    private RelativeLayout mItemLayout;
     private Button   mOutBtn;
 
     private MyItemClickListener listener1, listener2;
@@ -32,7 +33,8 @@ public class ProductInHolder extends RecyclerView.ViewHolder
         mProductNameTv = (TextView) rootView.findViewById(R.id.tv_product_name);
         mProductIdTv = (TextView) rootView.findViewById(R.id.tv_product_id);
         mProductAmountTv = (TextView) rootView.findViewById(R.id.tv_product_amount);
-        mDetailBtn = (Button) rootView.findViewById(R.id.btn_detail);
+        mItemLayout = (RelativeLayout) rootView.findViewById(R.id.rl_item);
+        mRroNoTv= (TextView) rootView.findViewById(R.id.tv_pro_no);
         mOutBtn = (Button) rootView.findViewById(R.id.btn_out);
         this.listener1 = listener1;
         this.listener2 = listener2;
@@ -44,7 +46,8 @@ public class ProductInHolder extends RecyclerView.ViewHolder
         mProductNameTv.setText("产品名称：" + mTaskInfo.getPro_name());
         mProductIdTv.setText("任务单号：" + mTaskInfo.getT_id());
         mProductAmountTv.setText("产品数量：" + mTaskInfo.getPro_count());
-        mDetailBtn.setOnClickListener(new View.OnClickListener()
+        mRroNoTv.setText("产品编号：" + mTaskInfo.getPro_no());
+        mItemLayout.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)

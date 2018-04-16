@@ -50,6 +50,13 @@ public class Urls
         return BASE_URL + "/trace/app/taskSelectList";
     }
 
+    //成品出库申请单选择
+    public static String getNoticeSelectListUrl()
+    {
+        return BASE_URL + "/trace/app/noticeSelectList";
+    }
+
+
 
     //任务出库材料列表
     public static String gettaskMetelistUrl()
@@ -132,6 +139,14 @@ public class Urls
     {
         return BASE_URL + "/trace/app/prodOutChek";
     }
+
+
+    //成品入库库校验
+    public static String getProdInChekUrl()
+    {
+        return BASE_URL + "/trace/app/prodInChek";
+    }
+
 
 
 }

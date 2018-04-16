@@ -8,14 +8,10 @@
     <string name="permission_read_storage_rationale">选择图片时需要读取权限</string>
     <string name="permission_write_storage_rationale">拍照时需要存储权限</string>
     <string name="modify"><u>修改</u></string>
-    <string name="wlrk">物料\n
-                        入库</string>
-    <string name="wlck">物料\n
-                        出库</string>
-    <string name="cpck">成品\n
-                        出库</string>
-    <string name="cprk">成品\n
-                        入库</string>
+    <string name="wlrk">物料入库</string>
+    <string name="wlck">物料出库</string>
+    <string name="cpck">成品出库</string>
+    <string name="cprk">成品入库</string>
     <string name="viewfinderview_status_text1">将二维码/条码放入取景框内</string>
     <string name="viewfinderview_status_text2">即可自动扫描</string>
 

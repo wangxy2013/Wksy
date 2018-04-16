@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="物料出库"
+            android:text="成品出库"
             android:textColor="@color/white"
             android:textSize="18sp"/>
 
@@ -53,15 +53,12 @@
             android:id="@+id/btn_submit"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_alignBaseline="@+id/et_task_id"
-            android:layout_alignBottom="@+id/et_task_id"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:background="@color/blueB"
             android:text="查询"
             android:textColor="@color/white"
-            android:textSize="18sp"
-           />
+            android:textSize="18sp"/>
 
         <EditText
             android:id="@+id/et_task_id"
@@ -70,7 +67,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dm_5"
             android:layout_marginRight="15dp"
-            android:layout_toLeftOf="@+id/btn_submit"
+            android:layout_toLeftOf="@+id/btn_submit1"
             android:layout_toRightOf="@+id/tv_task"
             android:background="@drawable/gray_frame_5dp"
             android:hint="申请单号查询"
@@ -103,9 +100,9 @@
             android:layout_centerVertical="true"
             android:background="@color/blueB"
             android:text="查询"
+            android:visibility="invisible"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            android:visibility="invisible"/>
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/tv_time"
@@ -113,11 +110,11 @@
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dm_5"
+            android:gravity="center_vertical"
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@+id/btn_submit2"
             android:layout_toRightOf="@+id/tv_sqrq"
             android:background="@drawable/gray_frame_5dp"
-            android:gravity="center_vertical"
             android:hint="请选择查询日期"
             android:padding="@dimen/dm_5"
             android:textSize="@dimen/t16"/>
@@ -147,9 +144,9 @@
             android:layout_centerVertical="true"
             android:background="@color/blueB"
             android:text="查询"
+            android:visibility="invisible"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            android:visibility="invisible"/>
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/tv_department"
@@ -157,13 +154,13 @@
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dm_5"
+            android:maxLines="1"
+            android:gravity="center_vertical"
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@+id/btn_submit3"
             android:layout_toRightOf="@+id/tv_sqbm"
             android:background="@drawable/gray_frame_5dp"
-            android:gravity="center_vertical"
             android:hint="请选择部门"
-            android:maxLines="1"
             android:padding="@dimen/dm_5"
             android:textSize="@dimen/t16"/>
 

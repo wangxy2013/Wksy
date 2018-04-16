@@ -15,8 +15,7 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringUtils
-{
+public class StringUtils {
 
     /**
      * 判断是否正整数
@@ -24,8 +23,7 @@ public class StringUtils
      * @param string
      * @return
      */
-    public static boolean isNumeric(String string)
-    {
+    public static boolean isNumeric(String string) {
         boolean flag = false;
         Pattern p = Pattern.compile("[1-9]{1}[0-9]{0,1}");
         Matcher m = p.matcher(string);
@@ -34,8 +32,7 @@ public class StringUtils
         return flag;
     }
 
-    public static boolean isAllNumeric(String str)
-    {
+    public static boolean isAllNumeric(String str) {
         Pattern pattern = Pattern.compile("^(-?\\d+)(\\.\\d+)?$");
         return pattern.matcher(str).matches();
     }
@@ -46,44 +43,35 @@ public class StringUtils
      * @param str
      * @return
      */
-    public static boolean stringIsEmpty(String str)
-    {
-        if ("".equals(str) || null == str || "null".equals(str))
-        {
+    public static boolean stringIsEmpty(String str) {
+        if ("".equals(str) || null == str || "null".equals(str)) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
 
-    public static String getFormTime(long time)
-    {
+    public static String getFormTime(long time) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");// 设置日期格式
         return df.format(time);// new Date()为获取当前系统时间
     }
 
-    public static String getFormTime1(long time)
-    {
+    public static String getFormTime1(long time) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");// 设置日期格式
         return df.format(time);// new Date()为获取当前系统时间
     }
 
-    public static String getDateToString(Date date)
-    {
+    public static String getDateToString(Date date) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");// 设置日期格式
         return df.format(date);// new Date()为获取当前系统时间
     }
 
-    SimpleDateFormat sdf  = new SimpleDateFormat("yyyy-MM-dd");
-    Date             date = new Date();
-    String           str  = sdf.format(date);
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    Date date = new Date();
+    String str = sdf.format(date);
 
-    public static String formatTime(long ms)
-    {
-        if (ms == 0)
-        {
+    public static String formatTime(long ms) {
+        if (ms == 0) {
             return "00:00:00";
         }
         // 将毫秒数换算成x天x时x分x秒x毫秒
@@ -107,39 +95,31 @@ public class StringUtils
         return strHour + ":" + strMinute + ":" + strSecond + " ";
     }
 
-    public static String getCurrentTime(String format)
-    {
+    public static String getCurrentTime(String format) {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.getDefault());
         String currentTime = sdf.format(date);
         return currentTime;
     }
 
-    public static String getCurrentTime()
-    {
+    public static String getCurrentTime() {
         return getCurrentTime("yyyy-MM-dd");
     }
 
-    public static String getTimestamp()
-    {
+    public static String getTimestamp() {
         return getCurrentTime("yyyy-MM-dd HH:mm:ss");
     }
 
-    public static String getCurrentTime1()
-    {
+    public static String getCurrentTime1() {
         return getCurrentTime("yyyy-MM");
     }
 
-    public static int getIndex(String str, String[] codeArr)
-    {
+    public static int getIndex(String str, String[] codeArr) {
         int mIndex = 0;
 
-        if (!stringIsEmpty(str))
-        {
-            for (int i = 0; i < codeArr.length; i++)
-            {
-                if (str.equals(codeArr[i]))
-                {
+        if (!stringIsEmpty(str)) {
+            for (int i = 0; i < codeArr.length; i++) {
+                if (str.equals(codeArr[i])) {
                     mIndex = i;
                 }
             }
@@ -158,30 +138,22 @@ public class StringUtils
      * @see [类、类#方法、类#成员]
      * @since [起始版本]
      */
-    public static int compareDate(String DATE1, String DATE2)
-    {
+    public static int compareDate(String DATE1, String DATE2) {
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        try
-        {
+        try {
             Date dt1 = df.parse(DATE1);
             Date dt2 = df.parse(DATE2);
-            if (dt1.getTime() > dt2.getTime())
-            {
+            if (dt1.getTime() > dt2.getTime()) {
                 System.out.println("dt1 在dt2前");
                 return 1;
-            }
-            else if (dt1.getTime() < dt2.getTime())
-            {
+            } else if (dt1.getTime() < dt2.getTime()) {
                 System.out.println("dt1在dt2后");
                 return -1;
-            }
-            else
-            {
+            } else {
                 return 0;
             }
-        } catch (Exception exception)
-        {
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
         return 0;
@@ -196,8 +168,7 @@ public class StringUtils
      * @see [类、类#方法、类#成员]
      * @since [起始版本]
      */
-    public static boolean checkEmail(String email)
-    {
+    public static boolean checkEmail(String email) {
         Pattern pattern = Pattern
                 .compile("^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$");
         Matcher matcher = pattern.matcher(email);
@@ -213,8 +184,7 @@ public class StringUtils
      * @see [类、类#方法、类#成员]
      * @since [起始版本]
      */
-    public static boolean isMobileNO(String mobiles)
-    {
+    public static boolean isMobileNO(String mobiles) {
         Pattern p = Pattern.compile("^((13[0-9])|(17[0-9])|(15[^4,\\D])|(176)|(18[0-9]))\\d{8}$");
 
         Matcher m = p.matcher(mobiles);
@@ -223,11 +193,9 @@ public class StringUtils
     }
 
     // 前一天
-    public static String getBeforeDay(String time)
-    {
+    public static String getBeforeDay(String time) {
         String day = null;
-        try
-        {
+        try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date date1 = sdf.parse(time);
 
@@ -236,8 +204,7 @@ public class StringUtils
             calendar.add(Calendar.DAY_OF_MONTH, -1);
             date1 = calendar.getTime();
             day = getDateToString(date1);
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -245,11 +212,9 @@ public class StringUtils
     }
 
     // 后一天
-    public static String getNextDay(String time)
-    {
+    public static String getNextDay(String time) {
         String day = null;
-        try
-        {
+        try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date date1 = sdf.parse(time);
 
@@ -258,8 +223,7 @@ public class StringUtils
             calendar.add(Calendar.DAY_OF_MONTH, 1);
             date1 = calendar.getTime();
             day = getDateToString(date1);
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -267,25 +231,21 @@ public class StringUtils
     }
 
 
-    public static String getFormatTime(String time)
-    {
+    public static String getFormatTime(String time) {
 
         String day = null;
-        try
-        {
+        try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date date1 = sdf.parse(time);
             day = getDateToString(date1);
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return day;
     }
 
-    public static String addMonth(String datetime, int month)
-    {
+    public static String addMonth(String datetime, int month) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         long lt = new Long(datetime);
         Date date = new Date(lt);
@@ -298,8 +258,7 @@ public class StringUtils
         return yearToMonth(sdf.format(date));
     }
 
-    public static String Day(String datetime)
-    {
+    public static String Day(String datetime) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         long lt = new Long(datetime);
         Date date = new Date(lt);
@@ -309,8 +268,7 @@ public class StringUtils
         return sdf.format(date);
     }
 
-    public static String addDay(String datetime, int day)
-    {
+    public static String addDay(String datetime, int day) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         long lt = new Long(datetime);
         Date date = new Date(lt);
@@ -330,13 +288,12 @@ public class StringUtils
      * @see [类、类#方法、类#成员]
      * @since [起始版本]
      */
-    public static String getTodayTime(int day)
-    {
+    public static String getTodayTime(int day) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();// 取时间
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        calendar.add(calendar.DAY_OF_MONTH, day-1);
+        calendar.add(calendar.DAY_OF_MONTH, day - 1);
         date = calendar.getTime(); // 这个时间就是日期增加过后的结果
         String dateString = sdf.format(date);
 
@@ -344,8 +301,7 @@ public class StringUtils
     }
 
 
-    public static String stampToDate(String s)
-    {
+    public static String stampToDate(String s) {
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd ");
         long lt = new Long(s);
@@ -354,14 +310,12 @@ public class StringUtils
         return yearToMonth(res);
     }
 
-    public static String yearToMonth(String time)
-    {
+    public static String yearToMonth(String time) {
         String[] str = time.split("-");
         return str[0] + "年" + str[1] + "月" + str[2] + "日  ";
     }
 
-    public static String getUUid()
-    {
+    public static String getUUid() {
         return UUID.randomUUID().toString();
 
     }
@@ -374,8 +328,7 @@ public class StringUtils
      * @see [类、类#方法、类#成员]
      * @since [起始版本]
      */
-    public static String getTomorrowTime()
-    {
+    public static String getTomorrowTime() {
         Date date = new Date();// 取时间
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
@@ -388,54 +341,34 @@ public class StringUtils
     }
 
 
-    public static float getRating(String starLevel)
-    {
+    public static float getRating(String starLevel) {
         float mRating = 3;
 
-        if ("1".equals(starLevel))
-        {
+        if ("1".equals(starLevel)) {
             mRating = 1;
-        }
-        else if ("2".equals(starLevel))
-        {
+        } else if ("2".equals(starLevel)) {
             mRating = (float) 1.5;
-        }
-        else if ("3".equals(starLevel))
-        {
+        } else if ("3".equals(starLevel)) {
             mRating = (float) 2;
-        }
-        else if ("4".equals(starLevel))
-        {
+        } else if ("4".equals(starLevel)) {
             mRating = (float) 2.5;
-        }
-        else if ("5".equals(starLevel))
-        {
+        } else if ("5".equals(starLevel)) {
             mRating = (float) 3;
-        }
-        else if ("6".equals(starLevel))
-        {
+        } else if ("6".equals(starLevel)) {
             mRating = (float) 3.5;
-        }
-        else if ("7".equals(starLevel))
-        {
+        } else if ("7".equals(starLevel)) {
             mRating = (float) 4;
-        }
-        else if ("8".equals(starLevel))
-        {
+        } else if ("8".equals(starLevel)) {
             mRating = (float) 4.5;
-        }
-        else if ("9".equals(starLevel))
-        {
+        } else if ("9".equals(starLevel)) {
             mRating = (float) 5;
         }
 
         return mRating;
     }
 
-    public static String formatString(String str)
-    {
-        if (stringIsEmpty(str))
-        {
+    public static String formatString(String str) {
+        if (stringIsEmpty(str)) {
             return "";
         }
 
@@ -444,8 +377,7 @@ public class StringUtils
 
 
     // 特殊字符过滤
-    public static String stringFilter(String str)
-    {
+    public static String stringFilter(String str) {
         String regEx = "[`~!@#$^&*()=|{}':;',\"\\[\\].<>~！@#￥……&*（）&;—|{}【】《》‘；：”“'。，、？]"; // 要过滤掉的字符
         Pattern p = Pattern.compile(regEx);
         Matcher m = p.matcher(str);
@@ -454,12 +386,10 @@ public class StringUtils
 
     private static long lastClickTime;
 
-    public static boolean isFastDoubleClick()
-    {
+    public static boolean isFastDoubleClick() {
         long time = System.currentTimeMillis();
         long timeD = time - lastClickTime;
-        if (0 < timeD && timeD < 800)
-        {
+        if (0 < timeD && timeD < 800) {
             return true;
         }
         lastClickTime = time;
@@ -475,11 +405,9 @@ public class StringUtils
      * @see [类、类#方法、类#成员]
      * @since [起始版本]
      */
-    public static String certificateFormat(String str)
-    {
+    public static String certificateFormat(String str) {
         String a = "";
-        if (!stringIsEmpty(str) && str.length() > 8)
-        {
+        if (!stringIsEmpty(str) && str.length() > 8) {
             a = str.substring(0, 4) + "****" + str.substring(str.length() - 4, str.length());
         }
 
@@ -495,11 +423,9 @@ public class StringUtils
      * @see [类、类#方法、类#成员]
      * @since [起始版本]
      */
-    public static String phoneFormat(String str)
-    {
+    public static String phoneFormat(String str) {
         String a = "";
-        if (!stringIsEmpty(str) && str.length() > 8)
-        {
+        if (!stringIsEmpty(str) && str.length() > 8) {
             a = str.substring(0, 3) + "****" + str.substring(str.length() - 4, str.length());
         }
 
@@ -512,8 +438,7 @@ public class StringUtils
      * @param name
      * @return
      */
-    public static boolean checkUserName(String name)
-    {
+    public static boolean checkUserName(String name) {
         String regEX = "^([\u4e00-\u9fa5]|[A-Za-z0-9._@-]){2,16}$";
         Pattern p = Pattern.compile(regEX);
         Matcher m = p.matcher(name);
@@ -528,10 +453,8 @@ public class StringUtils
      * @param strDate
      * @return
      */
-    public static Date strToDateLong(String strDate)
-    {
-        if (stringIsEmpty(strDate))
-        {
+    public static Date strToDateLong(String strDate) {
+        if (stringIsEmpty(strDate)) {
             return null;
         }
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -546,8 +469,7 @@ public class StringUtils
      * @param dateDate
      * @return
      */
-    public static String dateToStrLong(java.util.Date dateDate)
-    {
+    public static String dateToStrLong(java.util.Date dateDate) {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
         String dateString = formatter.format(dateDate);
         return dateString;
@@ -559,10 +481,8 @@ public class StringUtils
      * @param dateDate
      * @return
      */
-    public static String dateToStr(java.util.Date dateDate)
-    {
-        if (null == dateDate)
-        {
+    public static String dateToStr(java.util.Date dateDate) {
+        if (null == dateDate) {
             return "";
         }
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
@@ -571,19 +491,16 @@ public class StringUtils
     }
 
 
-    public static String longToShort(String time)
-    {
+    public static String longToShort(String time) {
 
         SimpleDateFormat sdf = null;
         String dateTime = "";
-        try
-        {
+        try {
             sdf = new SimpleDateFormat("HH:mm:ss");
             String strDatatime = time + "000";
             Long lDatatime = Long.parseLong(strDatatime);
             dateTime = sdf.format(lDatatime);
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             //TODO 处理异常
             e.printStackTrace();
         }
@@ -591,19 +508,16 @@ public class StringUtils
 
     }
 
-    public static String longToShort1(String time)
-    {
+    public static String longToShort1(String time) {
 
         SimpleDateFormat sdf = null;
         String dateTime = "";
-        try
-        {
+        try {
             sdf = new SimpleDateFormat("yyyyMMdd");
             String strDatatime = time + "000";
             Long lDatatime = Long.parseLong(strDatatime);
             dateTime = sdf.format(lDatatime);
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             //TODO 处理异常
             e.printStackTrace();
         }
@@ -611,19 +525,16 @@ public class StringUtils
 
     }
 
-    public static String longToShort2(String time)
-    {
+    public static String longToShort2(String time) {
 
         SimpleDateFormat sdf = null;
         String dateTime = "";
-        try
-        {
+        try {
             sdf = new SimpleDateFormat("MM/dd");
             String strDatatime = time + "000";
             Long lDatatime = Long.parseLong(strDatatime);
             dateTime = sdf.format(lDatatime);
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             //TODO 处理异常
             e.printStackTrace();
         }
@@ -632,19 +543,16 @@ public class StringUtils
     }
 
 
-    public static String longToShort3(String time)
-    {
+    public static String longToShort3(String time) {
 
         SimpleDateFormat sdf = null;
         String dateTime = "";
-        try
-        {
+        try {
             sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             String strDatatime = time + "000";
             Long lDatatime = Long.parseLong(strDatatime);
             dateTime = sdf.format(lDatatime);
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             //TODO 处理异常
             e.printStackTrace();
         }
@@ -654,19 +562,16 @@ public class StringUtils
 
     private static String code = "abcdefghijklmnopqrstuvwxyz";
 
-    public static String getRandomString(int length)
-    {
+    public static String getRandomString(int length) {
         StringBuffer sb = new StringBuffer();
         int len = code.length();
-        for (int i = 0; i < length; i++)
-        {
+        for (int i = 0; i < length; i++) {
             sb.append(code.charAt(getRandom(len - 1)));
         }
         return sb.toString();
     }
 
-    private static int getRandom(int count)
-    {
+    private static int getRandom(int count) {
 
         return (int) Math.round(Math.random() * (count));
 
@@ -674,18 +579,15 @@ public class StringUtils
 
 
     //获取聊天类型
-    public static String getChatType(String json)
-    {
+    public static String getChatType(String json) {
         String type = null;
-        try
-        {
+        try {
             JSONObject obj = new JSONObject(json);
 
             type = obj.optString("type");
 
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return type;
         }
@@ -695,18 +597,15 @@ public class StringUtils
     }
 
     //获取删除聊天消息
-    public static String getDelMsg(String json)
-    {
+    public static String getDelMsg(String json) {
         String type = null;
-        try
-        {
+        try {
             JSONObject obj = new JSONObject(json);
 
             type = obj.optString("msg_ymdid");
 
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return type;
         }
@@ -716,18 +615,15 @@ public class StringUtils
     }
 
     //获取圈子是否是工会圈子
-    public static String getGild(String json)
-    {
+    public static String getGild(String json) {
         String type = null;
-        try
-        {
+        try {
             JSONObject obj = new JSONObject(json);
 
             type = obj.optString("is_gild");
 
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return type;
         }
@@ -743,18 +639,14 @@ public class StringUtils
      * @param strURL url地址
      * @return url请求参数部分
      */
-    private static String TruncateUrlPage(String strURL)
-    {
+    private static String TruncateUrlPage(String strURL) {
         String strAllParam = null;
         String[] arrSplit = null;
         strURL = strURL.trim().toLowerCase();
         arrSplit = strURL.split("[?]");
-        if (strURL.length() > 1)
-        {
-            if (arrSplit.length > 1)
-            {
-                if (arrSplit[1] != null)
-                {
+        if (strURL.length() > 1) {
+            if (arrSplit.length > 1) {
+                if (arrSplit[1] != null) {
                     strAllParam = arrSplit[1];
                 }
             }
@@ -764,8 +656,7 @@ public class StringUtils
 
 
     //URL正则
-    public static boolean checkUrl(String urlString)
-    {
+    public static boolean checkUrl(String urlString) {
         String regex = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
         Pattern patt = Pattern.compile(regex);
         Matcher matcher = patt.matcher(urlString);
@@ -778,31 +669,24 @@ public class StringUtils
      * @param URL url地址
      * @return url请求参数部分
      */
-    public static Map<String, String> URLRequest(String URL)
-    {
+    public static Map<String, String> URLRequest(String URL) {
         Map<String, String> mapRequest = new HashMap<String, String>();
         String[] arrSplit = null;
         String strUrlParam = TruncateUrlPage(URL);
-        if (strUrlParam == null)
-        {
+        if (strUrlParam == null) {
             return mapRequest;
         }
         // 每个键值为一组
         arrSplit = strUrlParam.split("[&]");
-        for (String strSplit : arrSplit)
-        {
+        for (String strSplit : arrSplit) {
             String[] arrSplitEqual = null;
             arrSplitEqual = strSplit.split("[=]");
             // 解析出键值
-            if (arrSplitEqual.length > 1)
-            {
+            if (arrSplitEqual.length > 1) {
                 // 正确解析
                 mapRequest.put(arrSplitEqual[0], arrSplitEqual[1]);
-            }
-            else
-            {
-                if (arrSplitEqual[0] != "")
-                {
+            } else {
+                if (arrSplitEqual[0] != "") {
                     // 只有参数没有值，不加入
                     mapRequest.put(arrSplitEqual[0], "");
                 }
@@ -812,18 +696,34 @@ public class StringUtils
     }
 
 
-    public static boolean isNumber(String str)
-    {
-        java.util.regex.Pattern pattern=java.util.regex.Pattern.compile("^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$"); // 判断小数点后一位的数字的正则表达式
-        java.util.regex.Matcher match=pattern.matcher(str);
-        if(match.matches()==false)
-        {
+    public static boolean isNumber(String str) {
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$"); // 判断小数点后一位的数字的正则表达式
+        java.util.regex.Matcher match = pattern.matcher(str);
+        if (match.matches() == false) {
             return false;
-        }
-        else
-        {
+        } else {
             return true;
         }
+    }
+
+
+    public static String getFormatDate(String time) {
+        String date = "";
+
+        String[] aa = time.split("-");
+
+        date = aa[0] +"-" +buwei(aa[1]) +"-" +buwei(aa[2]);
+
+        return date;
+    }
+
+
+    public static  String buwei(String str) {
+        if (str.length() == 1) {
+            return "0" + str;
+        }
+
+        return str;
     }
 
 

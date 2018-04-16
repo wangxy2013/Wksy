@@ -4,6 +4,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="@dimen/dm_10"
+                android:id="@+id/rl_item"
     >
 
     <LinearLayout
@@ -12,42 +13,36 @@
         android:orientation="vertical">
         <TextView
 
-            android:id="@+id/tv_sn"
+            android:id="@+id/tv_tzdh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="jfhsjkdfhk"
             android:textColor="@color/black"
             android:textSize="16sp"/>
+
+
         <TextView
 
-            android:id="@+id/tv_batch"
+            android:id="@+id/tv_tzbm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="jfhsjkdfhk"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
-        <TextView
-
-            android:id="@+id/tv_kwn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dm_3"
             android:text="1111111"
             android:textColor="@color/black"
             android:textSize="16sp"/>
-    </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_del"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:background="@color/blueB"
-        android:text="删除"
-        android:textColor="@color/white"
-        android:textSize="14sp"/>
+        <TextView
+
+            android:id="@+id/tv_tzrq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dm_3"
+            android:text="1111111"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
 
 
 </RelativeLayout>

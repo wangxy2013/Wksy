@@ -59,6 +59,8 @@ public class ProductOutActivity extends BaseActivity implements IRequestListener
     @BindView(R.id.rv_sn)
     RecyclerView rvSn;
 
+    @BindView(R.id.et_n_itm)
+    EditText     etN_itm;
     private List<ProInfo> mSnList = new ArrayList<>();
     private SNAdapter mSNAdapter;
     private List<KWInfo> kwInfoList = new ArrayList<>();
@@ -121,6 +123,8 @@ public class ProductOutActivity extends BaseActivity implements IRequestListener
             n_itm = mProdNoticeInfo.getN_itm();
             so_id = mProdNoticeInfo.getSo_id();
             so_itm = mProdNoticeInfo.getSo_itm();
+            kw_code = mProdNoticeInfo.getKw();
+            kw_name= mProdNoticeInfo.getKwn();
         }
     }
 
@@ -146,7 +150,8 @@ public class ProductOutActivity extends BaseActivity implements IRequestListener
         tvTitle.setText("成品出库");
         tvSubmit.setVisibility(View.VISIBLE);
         tvSubmit.setText("出库");
-
+        etN_itm.setText(mProdNoticeInfo.getBat_no());
+        tvLibrary.setText(kw_name);
         rvSn.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rvSn.addItemDecoration(new DividerDecoration(this));
 
@@ -165,7 +170,7 @@ public class ProductOutActivity extends BaseActivity implements IRequestListener
     private void getKv()
     {
         Map<String, String> valuePairs = new HashMap<>();
-        valuePairs.put("CODE", "kw");
+        valuePairs.put("CODE", "KW");
         DataRequest.instance().request(ProductOutActivity.this, Urls.getKVUrl(), this, HttpRequest.POST, GET_WV, valuePairs,
                 new KWListHandler());
 
@@ -211,13 +216,18 @@ public class ProductOutActivity extends BaseActivity implements IRequestListener
                     mProInfo.setSo_id(so_id);
                     mProInfo.setN_itm(n_itm);
                     mProInfo.setSo_itm(so_itm);
+                    mProInfo.setBat_no(mProdNoticeInfo.getBat_no());
+                    mProInfo.setCus_name(mProdNoticeInfo.getCus_name());
+                    mProInfo.setCus_no(mProdNoticeInfo.getCus_no());
+                    mProInfo.setDep(mProdNoticeInfo.getDep());
+                    mProInfo.setDep_name(mProdNoticeInfo.getDep_name());
                     mSnList.add(mProInfo);
 
-
                     Map<String, String> valuePairs = new HashMap<>();
-                    valuePairs.put("CONTENT", sn);
+                    valuePairs.put("SN", sn);
                     valuePairs.put("N_ID", n_id);
                     valuePairs.put("N_ITM", n_itm);
+                    valuePairs.put("PRD_NO", mProdNoticeInfo.getPro_no());
                     DataRequest.instance().request(ProductOutActivity.this, Urls.getProdOutChekUrl(), this, HttpRequest.POST, PROD_OUT, valuePairs,
                             new ResultHandler());
 

@@ -41,6 +41,11 @@ public class ProductOutDetailActivity extends BaseActivity implements PullToRefr
     TextView tvProductId;
     @BindView(R.id.tv_product_name)
     TextView tvProductName;
+
+    @BindView(R.id.tv_n_itm)
+    TextView tvN_itm;
+    @BindView(R.id.tv_prd_no)
+    TextView tvProductNo;
     @BindView(R.id.tv_product_amount)
     TextView tvProductAmount;
     @BindView(R.id.tv_kw)
@@ -124,7 +129,9 @@ public class ProductOutDetailActivity extends BaseActivity implements PullToRefr
             tvProductId.setText("任务单号：" + mProdNoticeInfo.getN_id());
             tvProductName.setText("产品名称：" + mProdNoticeInfo.getPro_name());
             tvProductAmount.setText("产品数量：" + mProdNoticeInfo.getPro_count());
-            tvKw.setText("所在库位：" + mProdNoticeInfo.getKwn());
+            tvKw.setText("客户名称：" + mProdNoticeInfo.getCus_name());
+            tvN_itm.setText("项次号：" + mProdNoticeInfo.getN_itm());
+            tvProductNo.setText("产品编号：" + mProdNoticeInfo.getPro_no());
         }
 
         mProductOutItemAdapter = new ProductOutItemAdapter(mProductInfoList, ProductOutDetailActivity.this);
@@ -138,6 +145,7 @@ public class ProductOutDetailActivity extends BaseActivity implements PullToRefr
     {
         Map<String, String> valuePairs = new HashMap<>();
         valuePairs.put("N_ID", mProdNoticeInfo.getN_id());
+        valuePairs.put("N_ITM", mProdNoticeInfo.getN_itm());
         valuePairs.put("PAGE", pn + "");
         valuePairs.put("PAGESIZE", "15");
 
@@ -198,11 +206,5 @@ public class ProductOutDetailActivity extends BaseActivity implements PullToRefr
     }
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
+
 }

@@ -47,9 +47,12 @@ public class TaskInfo implements Serializable
     private String dep_name;
     private String ql_date;
 
+    private String  n_id;
+
+
     public TaskInfo(JSONObject obj)
     {
-
+        this.n_id = obj.optString("N_ID");
         this.bat_no = obj.optString("BAT_NO");
         this.est_itm = obj.optString("EST_ITM");
         this.mo_no = obj.optString("MO_NO");
@@ -368,5 +371,14 @@ public class TaskInfo implements Serializable
     public void setWh(String wh)
     {
         this.wh = wh;
+    }
+
+
+    public String getN_id() {
+        return n_id;
+    }
+
+    public void setN_id(String n_id) {
+        this.n_id = n_id;
     }
 }

@@ -17,6 +17,7 @@ public class SNHolder extends RecyclerView.ViewHolder
 {
     private TextView            mSnTv;
     private TextView            mKwnTv;
+    private TextView            mBatchTv;
     private Button              mDelBtn;
     private MyItemClickListener listener;
 
@@ -26,6 +27,7 @@ public class SNHolder extends RecyclerView.ViewHolder
 
         mSnTv = (TextView) rootView.findViewById(R.id.tv_sn);
         mKwnTv = (TextView) rootView.findViewById(R.id.tv_kwn);
+        mBatchTv= (TextView) rootView.findViewById(R.id.tv_batch);
         mDelBtn = (Button) rootView.findViewById(R.id.btn_del);
         this.listener = listener;
     }
@@ -35,7 +37,7 @@ public class SNHolder extends RecyclerView.ViewHolder
     {
          mSnTv.setText("SN码：" + mProInfo.getSn());
         mKwnTv.setText("库位：" + mProInfo.getKwn());
-
+        mBatchTv.setText("批次号：" + mProInfo.getBatch());
         mDelBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override

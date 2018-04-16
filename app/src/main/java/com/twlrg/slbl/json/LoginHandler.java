@@ -27,6 +27,7 @@ public class LoginHandler extends JsonHandler
             ConfigManager.instance().setUserScore(obj.optString("USER_SCORE"));
             ConfigManager.instance().setBusId(obj.optString("BUS_ID"));
             ConfigManager.instance().setUserName(obj.optString("NAME"));
+            ConfigManager.instance().setUserPower(obj.optString("USER_POWER"));
 
         } catch (Exception e)
         {
