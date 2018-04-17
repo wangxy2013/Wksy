@@ -45,7 +45,7 @@ public class ProductInHolder extends RecyclerView.ViewHolder
     {
         mProductNameTv.setText("产品名称：" + mTaskInfo.getPro_name());
         mProductIdTv.setText("任务单号：" + mTaskInfo.getT_id());
-        mProductAmountTv.setText("产品数量：" + mTaskInfo.getPro_count());
+        mProductAmountTv.setText("剩余数量：" + mTaskInfo.getPro_count());
         mRroNoTv.setText("产品编号：" + mTaskInfo.getPro_no());
         mItemLayout.setOnClickListener(new View.OnClickListener()
         {

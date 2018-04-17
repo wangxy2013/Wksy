@@ -100,10 +100,12 @@ public class MaterInActivity extends BaseActivity implements IRequestListener
 
                 case REQUEST_SUCCESS:
                     ToastUtil.show(MaterInActivity.this, "操作成功！");
+                    tvSubmit.setEnabled(true);
                     finish();
                     break;
 
                 case REQUEST_FAIL:
+                    tvSubmit.setEnabled(true);
                     ToastUtil.show(MaterInActivity.this, msg.obj.toString());
                     break;
 
@@ -284,6 +286,7 @@ public class MaterInActivity extends BaseActivity implements IRequestListener
                 ToastUtil.show(MaterInActivity.this, "请先进行添加操作");
                 return;
             }
+            tvSubmit.setEnabled(false);
             Map<String, List> valuePairs = new HashMap<>();
             valuePairs.put("list", mMaterInfoList);
             DataRequest.instance().request1(MaterInActivity.this, Urls.getProductCheckinUrl(), this, HttpRequest.POST, CHECK_IN, valuePairs,

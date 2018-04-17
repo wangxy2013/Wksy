@@ -20,8 +20,9 @@ public class ResultHandler extends JsonHandler
     }
 
     @Override
-    protected void parseJson(JSONObject obj) throws Exception
+    protected void parseJson(JSONObject jsonObj) throws Exception
     {
-        content = obj.optString("content");
+        JSONObject obj = jsonObj.optJSONObject("bodys");
+        content = obj.optString("BAT_NO");
     }
 }

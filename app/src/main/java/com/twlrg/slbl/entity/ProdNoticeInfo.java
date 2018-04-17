@@ -27,7 +27,7 @@ public class ProdNoticeInfo implements Serializable {
 
     private String pro_no;
     private String bat_no;
-    private String qty_import;
+    private int qty_import;
     private String qty_ps;
     private String qty_pre;
     private String dep;
@@ -40,7 +40,7 @@ public class ProdNoticeInfo implements Serializable {
 
         this.pro_no = obj.optString("PRO_NO");
         this.bat_no = obj.optString("BAT_NO");
-        this.qty_import = obj.optString("QTY_IMPORT");
+        this.qty_import = obj.optInt("QTY_IMPORT");
         this.qty_ps = obj.optString("QTY_PS");
         this.qty_pre = obj.optString("QTY_PRE");
         this.dep = obj.optString("DEP");
@@ -170,11 +170,11 @@ public class ProdNoticeInfo implements Serializable {
         this.bat_no = bat_no;
     }
 
-    public String getQty_import() {
+    public int getQty_import() {
         return qty_import;
     }
 
-    public void setQty_import(String qty_import) {
+    public void setQty_import(int qty_import) {
         this.qty_import = qty_import;
     }
 

@@ -37,7 +37,7 @@ public class SNHolder extends RecyclerView.ViewHolder
     {
          mSnTv.setText("SN码：" + mProInfo.getSn());
         mKwnTv.setText("库位：" + mProInfo.getKwn());
-        mBatchTv.setText("批次号：" + mProInfo.getBatch());
+        mBatchTv.setText("批次号：" + mProInfo.getBat_no());
         mDelBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override

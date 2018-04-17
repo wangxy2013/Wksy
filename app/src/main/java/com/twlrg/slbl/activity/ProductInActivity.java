@@ -14,6 +14,7 @@ import com.twlrg.slbl.R;
 import com.twlrg.slbl.adapter.SNAdapter;
 import com.twlrg.slbl.entity.KWInfo;
 import com.twlrg.slbl.entity.ProInfo;
+import com.twlrg.slbl.entity.TaskInfo;
 import com.twlrg.slbl.http.DataRequest;
 import com.twlrg.slbl.http.HttpRequest;
 import com.twlrg.slbl.http.IRequestListener;
@@ -62,17 +63,17 @@ public class ProductInActivity extends BaseActivity implements IRequestListener
     private List<ProInfo> mSnList = new ArrayList<>();
     private SNAdapter mSNAdapter;
     private List<KWInfo> kwInfoList = new ArrayList<>();
-    private String kw_code, kw_name, t_id,prd_no;
+    private String kw_code, kw_name, t_id, prd_no;
 
-    private static final int REQUEST_SUCCESS = 0x01;
-    public static final  int REQUEST_FAIL    = 0x02;
-    private static final int GET_WV_SUCCESS  = 0x04;
-    private static final int PRODUCT_CHECK_SUCCESS = 0x05;
-    private static final int PRODUCT_CHECK_FAIL= 0x06;
-    private static final String GET_WV   = "GET_WV";
-    private static final String CHECK_IN = "CHECK_IN";
-    private static final String  PRODUCT_CHECK = " PRODUCT_CHECK";
-    private BaseHandler mHandler = new BaseHandler(this)
+    private static final int         REQUEST_SUCCESS       = 0x01;
+    public static final  int         REQUEST_FAIL          = 0x02;
+    private static final int         GET_WV_SUCCESS        = 0x04;
+    private static final int         PRODUCT_CHECK_SUCCESS = 0x05;
+    private static final int         PRODUCT_CHECK_FAIL    = 0x06;
+    private static final String      GET_WV                = "GET_WV";
+    private static final String      CHECK_IN              = "CHECK_IN";
+    private static final String      PRODUCT_CHECK         = " PRODUCT_CHECK";
+    private              BaseHandler mHandler              = new BaseHandler(this)
     {
         @Override
         public void handleMessage(Message msg)
@@ -84,10 +85,12 @@ public class ProductInActivity extends BaseActivity implements IRequestListener
 
                 case REQUEST_SUCCESS:
                     ToastUtil.show(ProductInActivity.this, "操作成功！");
+                    tvSubmit.setEnabled(true);
                     finish();
                     break;
 
                 case REQUEST_FAIL:
+                    tvSubmit.setEnabled(true);
                     ToastUtil.show(ProductInActivity.this, msg.obj.toString());
                     break;
 
@@ -95,11 +98,20 @@ public class ProductInActivity extends BaseActivity implements IRequestListener
                     KWListHandler mKWListHandler = (KWListHandler) msg.obj;
                     kwInfoList.clear();
                     kwInfoList.addAll(mKWListHandler.getKWInfoList());
+
+                    for (int i = 0; i < kwInfoList.size(); i++)
+                    {
+                        if (kw_code.equals(kwInfoList.get(i).getKw_code()))
+                        {
+                            kw_name = kwInfoList.get(i).getKw_name();
+                            tvLibrary.setText(kw_name);
+                        }
+                    }
                     break;
                 case PRODUCT_CHECK_SUCCESS:
                     mSNAdapter.notifyDataSetChanged();
                     break;
-                case   PRODUCT_CHECK_FAIL:
+                case PRODUCT_CHECK_FAIL:
                     ToastUtil.show(ProductInActivity.this, msg.obj.toString());
                     mSnList.remove(mSnList.size() - 1);
                     break;
@@ -107,12 +119,18 @@ public class ProductInActivity extends BaseActivity implements IRequestListener
         }
     };
 
+    private TaskInfo mTaskInfo;
 
     @Override
     protected void initData()
     {
-        t_id = getIntent().getStringExtra("T_ID");
-        prd_no = getIntent().getStringExtra("PRD_NO");
+        mTaskInfo = (TaskInfo) getIntent().getSerializableExtra("TASKINFO");
+        if (null != mTaskInfo)
+        {
+            t_id = mTaskInfo.getT_id();
+            prd_no = mTaskInfo.getPro_no();
+            kw_code = mTaskInfo.getKw();
+        }
     }
 
     @Override
@@ -151,6 +169,7 @@ public class ProductInActivity extends BaseActivity implements IRequestListener
             }
         });
         rvSn.setAdapter(mSNAdapter);
+        etBatch.setText(mTaskInfo.getBathc());
     }
 
     private void getKv()
@@ -179,7 +198,13 @@ public class ProductInActivity extends BaseActivity implements IRequestListener
                 ToastUtil.show(ProductInActivity.this, "请选择库位");
                 return;
             }
+            int mQty_import = mTaskInfo.getQty_import();
+            if (mSnList.size() >= mQty_import)
+            {
+                ToastUtil.show(ProductInActivity.this, "入库数量已超任务单需求数量");
+                return;
 
+            }
 
             if (StringUtils.stringIsEmpty(sn))
             {
@@ -243,6 +268,7 @@ public class ProductInActivity extends BaseActivity implements IRequestListener
                 ToastUtil.show(ProductInActivity.this, "请先进行添加操作");
                 return;
             }
+            tvSubmit.setEnabled(false);
             Map<String, List> valuePairs = new HashMap<>();
             valuePairs.put("list", mSnList);
             DataRequest.instance().request1(ProductInActivity.this, Urls.getProdCheckinUrl(), this, HttpRequest.POST, CHECK_IN, valuePairs,
@@ -299,7 +325,6 @@ public class ProductInActivity extends BaseActivity implements IRequestListener
                 mHandler.sendMessage(mHandler.obtainMessage(PRODUCT_CHECK_FAIL, resultMsg));
             }
         }
-
 
 
     }

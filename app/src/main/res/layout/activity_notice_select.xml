@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="申请单号："
+            android:text="通知单号："
             android:textColor="@color/black"
             android:textSize="16sp"/>
 
@@ -67,10 +67,10 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dm_5"
             android:layout_marginRight="15dp"
-            android:layout_toLeftOf="@+id/btn_submit1"
+            android:layout_toLeftOf="@+id/btn_submit"
             android:layout_toRightOf="@+id/tv_task"
             android:background="@drawable/gray_frame_5dp"
-            android:hint="申请单号查询"
+            android:hint="通知单号查询"
             android:padding="@dimen/dm_5"
             android:textSize="@dimen/t16"/>
 
@@ -87,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="申请日期："
+            android:text="通知日期："
             android:textColor="@color/black"
             android:textSize="16sp"/>
 
@@ -131,7 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="申请部门："
+            android:text="通知部门："
             android:textColor="@color/black"
             android:textSize="16sp"/>
 

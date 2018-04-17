@@ -115,34 +115,34 @@ public class ProductInListActivity extends BaseActivity implements PullToRefresh
         mPullToRefreshRecyclerView.setPullRefreshEnabled(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.addItemDecoration(new DividerDecoration(this));
-        etTaskId.addTextChangedListener(new TextWatcher()
-        {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
-            {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s)
-            {
-                if (s.length() == 0)
-                {
-                    mTid = "";
-                    mMaterialInfoList.clear();
-                    pn = 1;
-                    mRefreshStatus = 0;
-                    getProductList();
-
-                }
-            }
-        });
+//        etTaskId.addTextChangedListener(new TextWatcher()
+//        {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+//            {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count)
+//            {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s)
+//            {
+//                if (s.length() == 0)
+//                {
+//                    mTid = "";
+//                    mMaterialInfoList.clear();
+//                    pn = 1;
+//                    mRefreshStatus = 0;
+//                    getProductList();
+//
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -168,12 +168,12 @@ public class ProductInListActivity extends BaseActivity implements PullToRefresh
             public void onItemClick(View view, int position)
             {
                 t_id = mMaterialInfoList.get(position).getT_id();
-
-                startActivity(new Intent(ProductInListActivity.this, ProductInActivity.class)
-                        .putExtra("T_ID", t_id)
-                        .putExtra("PRD_NO", mMaterialInfoList.get(position).getPrd_no())
-
-                );
+                Bundle b = new Bundle();
+                b.putSerializable("TASKINFO", mMaterialInfoList.get(position));
+                startActivity(new Intent(ProductInListActivity.this, ProductInActivity.class).putExtras(b));
+//                startActivity(new Intent(ProductInListActivity.this, ProductInActivity.class)
+//                        .putExtra("T_ID", t_id)
+//                        .putExtra("PRD_NO", mMaterialInfoList.get(position).getPro_no()) );
 
 
             }
@@ -188,9 +188,9 @@ public class ProductInListActivity extends BaseActivity implements PullToRefresh
     protected void onResume()
     {
         super.onResume();
-        mMaterialInfoList.clear();
-        pn = 1;
-        getProductList();
+//        mMaterialInfoList.clear();
+//        pn = 1;
+//        getProductList();
     }
 
     private void getProductList()
@@ -233,11 +233,11 @@ public class ProductInListActivity extends BaseActivity implements PullToRefresh
         {
             mTid = etTaskId.getText().toString();
 
-            if (StringUtils.stringIsEmpty(mTid))
-            {
-                ToastUtil.show(this, "请输入任务单号");
-                return;
-            }
+//            if (StringUtils.stringIsEmpty(mTid))
+//            {
+//                ToastUtil.show(this, "请输入任务单号");
+//                return;
+//            }
 
 
             mMaterialInfoList.clear();

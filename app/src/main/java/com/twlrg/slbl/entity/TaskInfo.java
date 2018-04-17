@@ -25,7 +25,8 @@ public class TaskInfo implements Serializable
     private int qty_import;// 1,
     private String qty_rtn;// 0,
     private String wh;//01DX"
-
+    private String    bathc;
+    private String   kw;
 
     private String t_id;
     private String t_name;
@@ -52,6 +53,11 @@ public class TaskInfo implements Serializable
 
     public TaskInfo(JSONObject obj)
     {
+
+
+        this.bathc = obj.optString("BATHC");
+        this.kw = obj.optString("KW");
+
         this.n_id = obj.optString("N_ID");
         this.bat_no = obj.optString("BAT_NO");
         this.est_itm = obj.optString("EST_ITM");
@@ -380,5 +386,25 @@ public class TaskInfo implements Serializable
 
     public void setN_id(String n_id) {
         this.n_id = n_id;
+    }
+
+    public String getBathc()
+    {
+        return bathc;
+    }
+
+    public void setBathc(String bathc)
+    {
+        this.bathc = bathc;
+    }
+
+    public String getKw()
+    {
+        return kw;
+    }
+
+    public void setKw(String kw)
+    {
+        this.kw = kw;
     }
 }

@@ -29,14 +29,14 @@
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dm_25"
-            android:layout_marginRight="@dimen/dm_30"
+            android:layout_marginRight="@dimen/dm_5"
             android:layout_toRightOf="@+id/tv_sn"
             android:maxLines="1"
             android:background="@drawable/gray_frame_5dp"
             android:gravity="center_vertical"
             android:hint="请输入SN码"
             android:padding="@dimen/dm_5"
-            android:textSize="14sp"/>
+            android:textSize="12sp"/>
 
     </RelativeLayout>
 
@@ -98,8 +98,8 @@
             android:textSize="16sp"/>
 
 
-        <EditText
-            android:id="@+id/et_n_itm"
+        <TextView
+            android:id="@+id/tv_n_itm"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_centerVertical="true"

@@ -59,22 +59,23 @@ public class ProductOutActivity extends BaseActivity implements IRequestListener
     @BindView(R.id.rv_sn)
     RecyclerView rvSn;
 
-    @BindView(R.id.et_n_itm)
-    EditText     etN_itm;
+    @BindView(R.id.tv_n_itm)
+    TextView etN_itm;
     private List<ProInfo> mSnList = new ArrayList<>();
     private SNAdapter mSNAdapter;
     private List<KWInfo> kwInfoList = new ArrayList<>();
     private String kw_code, kw_name, n_id, n_itm, so_id, so_itm;
 
     private ProdNoticeInfo mProdNoticeInfo;
-    private static final int REQUEST_SUCCESS = 0x01;
-    public static final  int REQUEST_FAIL    = 0x02;
-    private static final int GET_WV_SUCCESS  = 0x04;
-    public static final  int PROD_OUT_FAIL    = 0x05;
-    private static final int PROD_OUT_SUCCESS  = 0x06;
-    private static final String GET_WV    = "GET_WV";
-    private static final String CHECK_OUT = "CHECK_OUT";
-    private static final String PROD_OUT = "PROD_OUT";;
+    private static final int    REQUEST_SUCCESS  = 0x01;
+    public static final  int    REQUEST_FAIL     = 0x02;
+    private static final int    GET_WV_SUCCESS   = 0x04;
+    public static final  int    PROD_OUT_FAIL    = 0x05;
+    private static final int    PROD_OUT_SUCCESS = 0x06;
+    private static final String GET_WV           = "GET_WV";
+    private static final String CHECK_OUT        = "CHECK_OUT";
+    private static final String PROD_OUT         = "PROD_OUT";
+    ;
     private BaseHandler mHandler = new BaseHandler(this)
     {
         @Override
@@ -87,10 +88,12 @@ public class ProductOutActivity extends BaseActivity implements IRequestListener
 
                 case REQUEST_SUCCESS:
                     ToastUtil.show(ProductOutActivity.this, "操作成功！");
+                    tvSubmit.setEnabled(true);
                     finish();
                     break;
 
                 case REQUEST_FAIL:
+                    tvSubmit.setEnabled(true);
                     ToastUtil.show(ProductOutActivity.this, msg.obj.toString());
                     break;
 
@@ -101,12 +104,16 @@ public class ProductOutActivity extends BaseActivity implements IRequestListener
                     break;
 
                 case PROD_OUT_SUCCESS:
-                    ToastUtil.show(ProductOutActivity.this,"添加成功");
+                    ToastUtil.show(ProductOutActivity.this, "添加成功");
+                    ResultHandler mResultHandler = (ResultHandler) msg.obj;
+                    etN_itm.setText(mResultHandler.getContent());
+                    mSnList.get(mSnList.size() - 1).setBat_no(mResultHandler.getContent());
+                    mSnList.get(mSnList.size() - 1).setBatch(mResultHandler.getContent());
                     mSNAdapter.notifyDataSetChanged();
                     break;
                 case PROD_OUT_FAIL:
                     ToastUtil.show(ProductOutActivity.this, msg.obj.toString());
-                    mSnList.remove(mSnList.size()-1);
+                    mSnList.remove(mSnList.size() - 1);
                     break;
             }
         }
@@ -124,7 +131,7 @@ public class ProductOutActivity extends BaseActivity implements IRequestListener
             so_id = mProdNoticeInfo.getSo_id();
             so_itm = mProdNoticeInfo.getSo_itm();
             kw_code = mProdNoticeInfo.getKw();
-            kw_name= mProdNoticeInfo.getKwn();
+            kw_name = mProdNoticeInfo.getKwn();
         }
     }
 
@@ -194,6 +201,14 @@ public class ProductOutActivity extends BaseActivity implements IRequestListener
                 return;
             }
 
+            int mQty_import = mProdNoticeInfo.getQty_import();
+            if (mSnList.size() >= mQty_import)
+            {
+                ToastUtil.show(ProductOutActivity.this, "出库数量已超出库通知单需求数量!");
+                return;
+
+            }
+
 
             if (StringUtils.stringIsEmpty(sn))
             {
@@ -216,7 +231,8 @@ public class ProductOutActivity extends BaseActivity implements IRequestListener
                     mProInfo.setSo_id(so_id);
                     mProInfo.setN_itm(n_itm);
                     mProInfo.setSo_itm(so_itm);
-                    mProInfo.setBat_no(mProdNoticeInfo.getBat_no());
+                    mProInfo.setBat_no(etN_itm.getText().toString());
+                    mProInfo.setBatch(etN_itm.getText().toString());
                     mProInfo.setCus_name(mProdNoticeInfo.getCus_name());
                     mProInfo.setCus_no(mProdNoticeInfo.getCus_no());
                     mProInfo.setDep(mProdNoticeInfo.getDep());
@@ -263,6 +279,7 @@ public class ProductOutActivity extends BaseActivity implements IRequestListener
             {
                 return;
             }
+            tvSubmit.setEnabled(false);
             Map<String, List> valuePairs = new HashMap<>();
             valuePairs.put("list", mSnList);
             DataRequest.instance().request1(ProductOutActivity.this, Urls.getProdCheckoutUrl(), this, HttpRequest.POST, CHECK_OUT, valuePairs,

@@ -98,10 +98,13 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
 
                 case REQUEST_SUCCESS:
                     ToastUtil.show(MaterialOut1Activity.this, "操作成功！");
+                    tvSubmit.setEnabled(true);
+
                     finish();
                     break;
 
                 case REQUEST_FAIL:
+                    tvSubmit.setEnabled(true);
                     ToastUtil.show(MaterialOut1Activity.this, msg.obj.toString());
                     break;
 
@@ -177,6 +180,8 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
         tvSubmit.setVisibility(View.VISIBLE);
         tvSubmit.setText("出库");
         etBatNo.setText(mTaskInfo.getBat_no());
+        etCount.setText(mTaskInfo.getQty_import()+"");
+
         rvSn.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rvSn.addItemDecoration(new DividerDecoration(this));
 
@@ -304,7 +309,7 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
             {
                 return;
             }
-
+            tvSubmit.setEnabled(false);
             Map<String, List> valuePairs = new HashMap<>();
             valuePairs.put("list", mMaerInfoList);
             DataRequest.instance().request1(MaterialOut1Activity.this, Urls.getCheckoutUrl(), this, HttpRequest.POST, CHECK_OUT, valuePairs,
@@ -421,11 +426,4 @@ public class MaterialOut1Activity extends BaseActivity implements IRequestListen
     }
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }
