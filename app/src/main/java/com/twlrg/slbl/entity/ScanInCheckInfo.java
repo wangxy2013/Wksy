@@ -13,7 +13,8 @@ public class ScanInCheckInfo
     private String kwn;
     private String count;
     private int rest;
-
+    private  String pro_no;
+    private  String pro_name;
 
     public ScanInCheckInfo(JSONObject obj)
     {
@@ -21,6 +22,9 @@ public class ScanInCheckInfo
         this.kwn = obj.optString("KWN");
         this.count = obj.optString("COUNT");
         this.rest = obj.optInt("REST");
+        this.pro_no = obj.optString("PRO_NO");
+        this.pro_name = obj.optString("PRO_NAME");
+
     }
 
     public String getKwn()
@@ -61,5 +65,25 @@ public class ScanInCheckInfo
     public void setKw(String kw)
     {
         this.kw = kw;
+    }
+
+    public String getPro_no()
+    {
+        return pro_no;
+    }
+
+    public void setPro_no(String pro_no)
+    {
+        this.pro_no = pro_no;
+    }
+
+    public String getPro_name()
+    {
+        return pro_name;
+    }
+
+    public void setPro_name(String pro_name)
+    {
+        this.pro_name = pro_name;
     }
 }

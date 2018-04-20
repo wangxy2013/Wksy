@@ -75,9 +75,10 @@ public class MaterInActivity extends BaseActivity implements IRequestListener
     private List<MaterialInfo1> mMaterInfoList = new ArrayList<>();
     private MaterialAdapter mMaterialAdapter;
     private List<KWInfo> kwInfoList = new ArrayList<>();
-    private String kw_code, kw_name;
+    private String kw_code, kw_name, pro_no, pro_name;
 
-    private int rest_count;
+    private String snCode;
+    private int    rest_count;
     private static final int    REQUEST_SUCCESS          = 0x01;
     public static final  int    REQUEST_FAIL             = 0x02;
     private static final int    GET_WV_SUCCESS           = 0x04;
@@ -124,6 +125,8 @@ public class MaterInActivity extends BaseActivity implements IRequestListener
                     mMaterInfoList.remove(mMaterInfoList.size() - 1);
                     break;
                 case SCAN_IN_CHECK_SN_SUCCESS:
+                    etSn.setText(snCode);
+
                     ScanInCheckInfoHandler mScanInCheckInfoHandler = (ScanInCheckInfoHandler) msg.obj;
                     ScanInCheckInfo scanInCheckInfo = mScanInCheckInfoHandler.getScanInCheckInfo();
 
@@ -134,6 +137,8 @@ public class MaterInActivity extends BaseActivity implements IRequestListener
                         tvLibrary.setText(kw_name);
                         etAccount.setText(scanInCheckInfo.getCount());
                         rest_count = scanInCheckInfo.getRest();
+                        pro_no = scanInCheckInfo.getPro_no();
+                        pro_name = scanInCheckInfo.getPro_name();
                     }
 
                     break;
@@ -244,6 +249,8 @@ public class MaterInActivity extends BaseActivity implements IRequestListener
                     MaterialInfo1 mProInfo = new MaterialInfo1();
                     mProInfo.setKw(kw_code);
                     mProInfo.setKwn(kw_name);
+                    mProInfo.setPrd_no(pro_no);
+                    mProInfo.setPro_name(pro_name);
                     mProInfo.setIs_in("1");
                     mProInfo.setMete_id(sn);
                     mProInfo.setIn_count(Integer.parseInt(count));
@@ -406,7 +413,7 @@ public class MaterInActivity extends BaseActivity implements IRequestListener
 
                 if (!StringUtils.stringIsEmpty(content))
                 {
-                    etSn.setText(content);
+                    snCode = content;
                     Map<String, String> valuePairs = new HashMap<>();
                     valuePairs.put("CONTENT", content);
                     DataRequest.instance().request(MaterInActivity.this, Urls.getScanInCheckUrl(), this, HttpRequest.POST, SCANINCHECK_SN, valuePairs,

@@ -142,10 +142,10 @@
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@color/blueB"
+            android:background="@color/blue"
             android:text="重置"
             android:visibility="visible"
-            android:textColor="@color/blue"
+            android:textColor="@color/white"
             android:textSize="18sp"/>
 
         <TextView
