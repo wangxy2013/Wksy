@@ -23,6 +23,10 @@ public class ResultHandler extends JsonHandler
     protected void parseJson(JSONObject jsonObj) throws Exception
     {
         JSONObject obj = jsonObj.optJSONObject("bodys");
-        content = obj.optString("BAT_NO");
+
+        if(null != obj)
+        {
+            content = obj.optString("BAT_NO");
+        }
     }
 }

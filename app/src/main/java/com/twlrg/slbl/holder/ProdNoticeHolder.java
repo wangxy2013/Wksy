@@ -54,6 +54,7 @@ public class ProdNoticeHolder extends RecyclerView.ViewHolder
         mProductAmountTv.setText("未交数量：" + mProdNoticeInfo.getQty_import());
         mKwTv.setText("客户名称：" + mProdNoticeInfo.getCus_name());
         mN_ITMTv.setText("项次号：" + mProdNoticeInfo.getN_itm());
+        mN_ITMTv.setVisibility(View.GONE);
         mPrdNoTv.setText("产品编号：" + mProdNoticeInfo.getPro_no());
         mItemLayout.setOnClickListener(new View.OnClickListener()
         {

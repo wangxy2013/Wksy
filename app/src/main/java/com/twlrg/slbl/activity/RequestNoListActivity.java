@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,7 +24,6 @@ import com.twlrg.slbl.listener.MyItemClickListener;
 import com.twlrg.slbl.listener.MyOnClickListener;
 import com.twlrg.slbl.utils.ConstantUtil;
 import com.twlrg.slbl.utils.DialogUtils;
-import com.twlrg.slbl.utils.StringUtils;
 import com.twlrg.slbl.utils.ToastUtil;
 import com.twlrg.slbl.utils.Urls;
 import com.twlrg.slbl.widget.DividerDecoration;
@@ -54,6 +51,8 @@ public class RequestNoListActivity extends BaseActivity implements PullToRefresh
     TextView tvTime;
     @BindView(R.id.tv_department)
     TextView tvDepartment;
+    @BindView(R.id.btn_submit3)
+    Button   btnRestart;
     private ImageView                 mBackIv;
     private TextView                  mTitleTv;
     private PullToRefreshRecyclerView mPullToRefreshRecyclerView;
@@ -64,18 +63,18 @@ public class RequestNoListActivity extends BaseActivity implements PullToRefresh
 
 
     private List<KWInfo> kwInfoList = new ArrayList<>();
-    private String kw_code="", kw_name;
+    private String kw_code = "", kw_name;
 
 
     private int pn = 1;
     private int mRefreshStatus;
-    private static final String GET_TASK_LIST   = "get_list";
-    private static final String GET_WV          = "GET_WV";
-    private static final int    REQUEST_SUCCESS = 0x01;
-    private static final int    REQUEST_FAIL    = 0x02;
-    private static final int    GET_WV_SUCCESS  = 0x04;
-    private              String mTid            = "";
-    private BaseHandler mHandler = new BaseHandler(this)
+    private static final String      GET_TASK_LIST   = "get_list";
+    private static final String      GET_WV          = "GET_WV";
+    private static final int         REQUEST_SUCCESS = 0x01;
+    private static final int         REQUEST_FAIL    = 0x02;
+    private static final int         GET_WV_SUCCESS  = 0x04;
+    private              String      mTid            = "";
+    private              BaseHandler mHandler        = new BaseHandler(this)
     {
         @Override
         public void handleMessage(Message msg)
@@ -104,6 +103,7 @@ public class RequestNoListActivity extends BaseActivity implements PullToRefresh
             }
         }
     };
+
 
     @Override
     protected void initData()
@@ -134,6 +134,7 @@ public class RequestNoListActivity extends BaseActivity implements PullToRefresh
     @Override
     protected void initEvent()
     {
+        btnRestart.setOnClickListener(this);
         mBackIv.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
         mPullToRefreshRecyclerView.setOnRefreshListener(this);
@@ -247,6 +248,16 @@ public class RequestNoListActivity extends BaseActivity implements PullToRefresh
                 });
             }
         }
+        else  if(v == btnRestart)
+        {
+            tvDepartment.setText("");
+            kw_code = "";
+            kw_name = "" ;
+            mTid="";
+            etTaskId.setText("");
+            tvTime.setText("");
+
+        }
     }
 
     @Override
@@ -272,7 +283,7 @@ public class RequestNoListActivity extends BaseActivity implements PullToRefresh
                 mHandler.sendMessage(mHandler.obtainMessage(REQUEST_FAIL, resultMsg));
             }
         }
-        else   if (GET_WV.equals(action))
+        else if (GET_WV.equals(action))
         {
             if (ConstantUtil.RESULT_SUCCESS.equals(resultCode))
             {
@@ -283,5 +294,11 @@ public class RequestNoListActivity extends BaseActivity implements PullToRefresh
     }
 
 
-
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

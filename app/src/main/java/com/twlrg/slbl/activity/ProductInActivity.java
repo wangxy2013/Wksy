@@ -198,8 +198,8 @@ public class ProductInActivity extends BaseActivity implements IRequestListener
                 ToastUtil.show(ProductInActivity.this, "请选择库位");
                 return;
             }
-            int mQty_import = mTaskInfo.getQty_import();
-            if (mSnList.size() >= mQty_import)
+            int mPro_count = Integer.parseInt(mTaskInfo.getPro_count());
+            if (mSnList.size() >= mPro_count)
             {
                 ToastUtil.show(ProductInActivity.this, "入库数量已超任务单需求数量");
                 return;

@@ -10,6 +10,8 @@ import java.io.Serializable;
 public class MaterialInfo1 implements Serializable
 {
 
+    private String pro_no;
+    private String pro_name;
 
     private String ql_no;
     private String pre_itm;
@@ -188,5 +190,25 @@ public class MaterialInfo1 implements Serializable
     public void setEst_itm(String est_itm)
     {
         this.est_itm = est_itm;
+    }
+
+    public String getPro_no()
+    {
+        return pro_no;
+    }
+
+    public void setPro_no(String pro_no)
+    {
+        this.pro_no = pro_no;
+    }
+
+    public String getPro_name()
+    {
+        return pro_name;
+    }
+
+    public void setPro_name(String pro_name)
+    {
+        this.pro_name = pro_name;
     }
 }

@@ -27,8 +27,8 @@ public abstract class JsonHandler
             }
             else
             {
-                JSONObject jsonOject = new JSONObject(jsonString);
-                JSONObject   obj = jsonOject.optJSONObject("data");
+                JSONObject jsonObject = new JSONObject(jsonString);
+                JSONObject   obj = jsonObject.optJSONObject("data");
 
 
                 if ("true".equals(obj.optString("success")))
@@ -42,7 +42,7 @@ public abstract class JsonHandler
                 }
                 setResultMsg(obj.optString("errorMsg"));
 
-                if (null != jsonOject) parseJson(obj);
+                if (null != jsonObject) parseJson(obj);
             }
         } catch (Exception e)
         {

@@ -52,6 +52,9 @@ public class NoticeListSelectActivity extends BaseActivity implements PullToRefr
     TextView tvTime;
     @BindView(R.id.tv_department)
     TextView tvDepartment;
+
+    @BindView(R.id.btn_submit3)
+    Button   btnRestart;
     private ImageView                 mBackIv;
     private TextView                  mTitleTv;
     private PullToRefreshRecyclerView mPullToRefreshRecyclerView;
@@ -132,6 +135,7 @@ public class NoticeListSelectActivity extends BaseActivity implements PullToRefr
     @Override
     protected void initEvent()
     {
+        btnRestart.setOnClickListener(this);
         mBackIv.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
         mPullToRefreshRecyclerView.setOnRefreshListener(this);
@@ -244,6 +248,15 @@ public class NoticeListSelectActivity extends BaseActivity implements PullToRefr
                     }
                 });
             }
+        }
+        else  if(v == btnRestart)
+        {
+            tvDepartment.setText("");
+            kw_code="";
+            kw_name="";
+            mTid="";
+            etTaskId.setText("");
+            tvTime.setText("");
         }
     }
 

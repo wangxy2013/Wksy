@@ -48,6 +48,7 @@ private RelativeLayout itemLayout;
         mProductIdTv.setText("申请单号：" + mTaskInfo.getQl_no());
         mProductAmountTv.setText("可出库量：" + mTaskInfo.getQty_import());
         mqLItmTv.setText("项次号：" + mTaskInfo.getPre_itm());
+        mqLItmTv.setVisibility(View.GONE);
         mPrd_noTv.setText("物料编号：" + mTaskInfo.getPrd_no());
         itemLayout.setOnClickListener(new View.OnClickListener()
         {

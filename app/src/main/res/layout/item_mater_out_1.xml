@@ -19,6 +19,26 @@
             android:text="jfhsjkdfhk"
             android:textColor="@color/black"
             android:textSize="16sp"/>
+        <TextView
+
+            android:id="@+id/tv_pro_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="jfhsjkdfhk"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <TextView
+
+            android:id="@+id/tv_pro_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="jfhsjkdfhk"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
 
         <TextView
             android:id="@+id/tv_kw"

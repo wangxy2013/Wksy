@@ -180,11 +180,17 @@ public class ProductOutListActivity extends BaseActivity implements PullToRefres
             }
         });
         mRecyclerView.setAdapter(mProdNoticeAdapter);
-        getProductList();
+
 
     }
 
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        getProductList();
+    }
 
     private void getProductList()
     {
